@@ -1,0 +1,101 @@
+{
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.leader": " ",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "f"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "after": [
+                "\"",
+                "+",
+                "y"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "p"
+            ],
+            "after": [
+                "\"",
+                "+",
+                "p"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "/"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "y"
+            ],
+            "after": [
+                "\"",
+                "+",
+                "y"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "p"
+            ],
+            "after": [
+                "\"",
+                "+",
+                "p"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "/"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        }
+    ],
+    "vim.matchpairs": "(:),{:},[:],<:>",
+    "vim.smartRelativeLine": true,
+    "editor.lineNumbers": "relative"
+}
