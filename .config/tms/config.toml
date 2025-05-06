@@ -1,0 +1,5 @@
+# root paths of git repos
+search_paths = ["~/code"]
+
+# non-git repo paths to add
+bookmarks = []
