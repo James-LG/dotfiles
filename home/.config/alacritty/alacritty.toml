@@ -1,0 +1,6 @@
+[font]
+normal = { family = "MesloLGM Nerd Font", style = "Regular" }
+
+[window]
+opacity = 0.6
+blur = true
