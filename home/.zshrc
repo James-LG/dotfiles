@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting zsh-autosuggestions git 1password fzf z)
+plugins=(zsh-syntax-highlighting zsh-autosuggestions git fzf z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,3 +108,19 @@ alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
 
 # Plugin Settings
 bindkey '^Y' autosuggest-accept
+
+# Manjaro defaults
+# Use powerline
+# USE_POWERLINE="true"
+# # Has weird character width
+# # Example:
+# #    is not a diamond
+# HAS_WIDECHARS="false"
+# # Source manjaro-zsh-configuration
+# if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+#   source /usr/share/zsh/manjaro-zsh-config
+# fi
+# # Use manjaro zsh prompt
+# if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+#   source /usr/share/zsh/manjaro-zsh-prompt
+# fi
