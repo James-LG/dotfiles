@@ -23,6 +23,12 @@ An alias has been configured to open this sheet easily with `cheatsheet`.
 | `Super+l` | Lock screen |
 | `Alt+Q` | Quit program |
 
+## zsh Shell
+
+| Keybind | Description |
+| ------- | ----------- |
+| `C-y`   | Accept autosuggestion |
+
 ## tmux & tmux-sessionizer
 
 All tmux commands are prefixed with `Ctrl+b`.
@@ -61,9 +67,10 @@ Normal mode bindings
 | ------- | ----------- |
 | `<l>pv` | Open file explorer |
 | `C-p`   | Fuzzy find git files |
+| `<l>pf` | Fuzzy find all files |
+| `<l>ph` | Fuzzy find all files (including hidden files) |
 | `<l>pws` | Fuzzy find by word |
 | `<l>ps` | Fuzzy find with grep |
-| `<l>pf` | Fuzzy find all files |
 | `<l>a`  | Add file to harpoon |
 | `C-e`   | Open harpoon menu |
 | `C-h`   | Harpoon 1 |
@@ -76,6 +83,10 @@ Normal mode bindings
 | `[d` and `]d` | Go to prev and next diagnostic |
 | `C-y`   | Accept suggestion |
 | `<l>xx` | Toggle trouble window |
+| `<l>cf` | Apply code formatter |
+| `C-w,w` | Focus horizontal window split |
+| `C-o`   | Go back to previous position |
+| `C-I`   | Go forward to next position (opposite of above) |
 
 Insert mode bindings
 
@@ -85,8 +96,7 @@ Insert mode bindings
 | `C-[`   | Switch to normal mode |
 | `C-w`   | Delete word |
 
-
-File explorer bindings
+NetRW File explorer bindings
 
 | Keybind | Description |
 | ------- | ----------- |

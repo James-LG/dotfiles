@@ -44,3 +44,5 @@ vim.opt.listchars:append {
     trail = space,
     nbsp = space
 }
+
+vim.opt.cursorline = true

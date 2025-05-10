@@ -1,10 +1,10 @@
 return {
-    -- BEGIN remove mason on nixos
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    -- END remove mason on nixos
     "neovim/nvim-lspconfig",
     dependencies = {
+        -- BEGIN remove mason on nixos
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        -- END remove mason on nixos
         "stevearc/conform.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -33,16 +33,21 @@ return {
 
         -- BEGIN remove mason on nixos
         require("mason").setup()
-        require("mason-lspconfig").setup()
+        require("mason-lspconfig").setup({
+            ensure_installed = {
+                "lua_ls",
+                "gopls",
+            }
+        })
         -- END remove mason on nixos
 
         -- lsps
-        require('lspconfig').pyright.setup({})
-        require('lspconfig').lua_ls.setup({})
-        require('lspconfig').rust_analyzer.setup({})
-        require('lspconfig').ts_ls.setup({})
-        require('lspconfig').nil_ls.setup({})
-        require('lspconfig').elixirls.setup({})
+        -- require('lspconfig').pyright.setup({})
+        -- require('lspconfig').lua_ls.setup({})
+        -- require('lspconfig').rust_analyzer.setup({})
+        -- require('lspconfig').ts_ls.setup({})
+        -- require('lspconfig').nil_ls.setup({})
+        -- require('lspconfig').elixirls.setup({})
 
         -- completions
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
