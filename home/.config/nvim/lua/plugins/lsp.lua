@@ -13,31 +13,32 @@ return {
         "hrsh7th/nvim-cmp",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "j-hui/fidget.nvim"
+        "j-hui/fidget.nvim",
     },
 
     config = function()
         require("conform").setup({
-            formatters_by_ft = {
-            }
+            formatters_by_ft = {},
         })
-        local cmp = require('cmp')
+        local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            cmp_lsp.default_capabilities()
+        )
 
         require("fidget").setup({})
 
         -- BEGIN remove mason on nixos
         require("mason").setup()
         require("mason-lspconfig").setup({
+            automatic_enable = true,
             ensure_installed = {
                 "lua_ls",
                 "gopls",
-            }
+            },
         })
         -- END remove mason on nixos
 
@@ -49,27 +50,30 @@ return {
         -- require('lspconfig').nil_ls.setup({})
         -- require('lspconfig').elixirls.setup({})
 
+        -- extra keybinds
+        vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+
         -- completions
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
             snippet = {
                 expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
             mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+                ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For luasnip users.
+                { name = "nvim_lsp" },
+                { name = "luasnip" }, -- For luasnip users.
             }, {
-                { name = 'buffer' },
-            })
+                { name = "buffer" },
+            }),
         })
 
         vim.diagnostic.config({
@@ -83,5 +87,10 @@ return {
                 prefix = "",
             },
         })
-    end
+
+        -- find all references with telescope
+        vim.keymap.set("n", "<leader>gr", function()
+            require("telescope.builtin").lsp_references()
+        end, {})
+    end,
 }

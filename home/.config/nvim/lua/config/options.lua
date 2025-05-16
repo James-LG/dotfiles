@@ -46,3 +46,4 @@ vim.opt.listchars:append {
 }
 
 vim.opt.cursorline = true
+-- vim.opt.hlsearch = true -- higlight search matches as you type

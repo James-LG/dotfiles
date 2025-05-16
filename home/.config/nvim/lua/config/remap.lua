@@ -1,3 +1,3 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>cf", function() require('conform').format() end)
+-- commented out while using nvim-tree
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
