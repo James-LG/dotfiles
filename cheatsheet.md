@@ -6,13 +6,13 @@ My personal keybinds for various utilities.
 
 An alias has been configured to open this sheet easily with `cheatsheet`.
 
-## Linux OS
+# Linux OS
 
 | Keybind | Description |
 | ------- | ----------- |
 | `Ctrl+Alt+F7` | Login screen |
 
-## i3wm
+# i3wm
 
 | Keybind | Description |
 | ------- | ----------- |
@@ -23,13 +23,13 @@ An alias has been configured to open this sheet easily with `cheatsheet`.
 | `Super+l` | Lock screen |
 | `Alt+Q` | Quit program |
 
-## zsh Shell
+# zsh Shell
 
 | Keybind | Description |
 | ------- | ----------- |
 | `C-y`   | Accept autosuggestion |
 
-## tmux & tmux-sessionizer
+# tmux & tmux-sessionizer
 
 All tmux commands are prefixed with `Ctrl+b`.
 
@@ -61,34 +61,55 @@ All tmux commands are prefixed with `Ctrl+b`.
 Leader key `<l>` is Space.
 Move through context menus with `C-p` (previous) and `C-n` (next).
 
-Normal mode bindings
+## Normal mode bindings
 
 | Keybind | Description |
 | ------- | ----------- |
-| `<l>pv` | Open file explorer |
+| `<l>pv` | (Disabled) Open file explorer |
+| `<l>tt` | Open file tree at current file |
+| `C-w,w` | Focus horizontal window split |
+| `C-o`   | Go back to previous position |
+| `C-I`   | Go forward to next position (opposite of above) |
+
+### Telescope bindings
+
+| Keybind | Description |
+| ------- | ----------- |
 | `C-p`   | Fuzzy find git files |
 | `<l>pf` | Fuzzy find all files |
 | `<l>ph` | Fuzzy find all files (including hidden files) |
 | `<l>pws` | Fuzzy find by word |
 | `<l>ps` | Fuzzy find with grep |
-| `<l>a`  | Add file to harpoon |
-| `C-e`   | Open harpoon menu |
-| `C-h`   | Harpoon 1 |
-| `C-t`   | Harpoon 2 |
-| `C-n`   | Harpoon 3 |
-| `C-s`   | Harpoon 4 |
+
+### Coding bindings
+
+| Keybind | Description |
+| ------- | ----------- |
 | `gcc`   | Comment line |
 | `K`     | Hover (get info) |
 | `C-w,d` | Open diagnostic from underline |
 | `[d` and `]d` | Go to prev and next diagnostic |
 | `C-y`   | Accept suggestion |
 | `<l>xx` | Toggle trouble window |
+| `<l>gr` | Find all references with Telescope |
+| `grr`   | Find all references with LSP |
+| `gri`   | Go to implementation |
+| `gra`   | Code actions (quick fixes) |
+| `grn`   | Rename symbol |
 | `<l>cf` | Apply code formatter |
-| `C-w,w` | Focus horizontal window split |
-| `C-o`   | Go back to previous position |
-| `C-I`   | Go forward to next position (opposite of above) |
 
-Insert mode bindings
+### Harpoon bindings
+
+| Keybind | Description |
+| ------- | ----------- |
+| `<l>a`  | Add file to harpoon |
+| `C-e`   | Open harpoon menu |
+| `C-h`   | Harpoon 1 |
+| `C-j`   | Harpoon 2 |
+| `C-k`   | Harpoon 3 |
+| `C-l`   | Harpoon 4 |
+
+## Insert mode bindings
 
 | Keybind | Description |
 | ------- | ----------- |
@@ -96,7 +117,17 @@ Insert mode bindings
 | `C-[`   | Switch to normal mode |
 | `C-w`   | Delete word |
 
-NetRW File explorer bindings
+## nvim-tree bindings
+
+| Keybind | Description |
+| ------- | ----------- |
+| `g?`    | Show hotkey help |
+| `a`     | Add file or directory |
+| `P`     | Go to parent directory |
+
+## NetRW File explorer bindings
+
+NetRW is disabled in my config since it is replaced by nvim-tree.
 
 | Keybind | Description |
 | ------- | ----------- |

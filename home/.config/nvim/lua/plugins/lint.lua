@@ -5,6 +5,7 @@ return {
         require("lint").linters_by_ft = {
             ["javascript"] = { "eslint_d", "codespell" },
             ["typescript"] = { "eslint_d", "codespell" },
+            ["typescriptreact"] = { "eslint_d", "codespell" },
             ["text"] = { "codespell" },
             ["markdown"] = { "codespell" },
         }
@@ -14,5 +15,8 @@ return {
                 require("lint").try_lint()
             end,
         })
+        vim.keymap.set("n", "<leader>cl", function()
+            require("lint").try_lint()
+        end)
     end
 }
