@@ -2,6 +2,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        lazy = false,
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
@@ -24,9 +25,12 @@ return {
                 "xml",
                 "yaml",
                 "rust",
-                "nix"
-            }
-        }
-
-    }
+                "nix",
+            },
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+        end,
+    },
 }
+

@@ -5,5 +5,9 @@ return {
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
-    opts = {},
+    opts = {
+        bypass_save_filetypes = {
+            "no-neck-pain",
+        },
+    },
 }

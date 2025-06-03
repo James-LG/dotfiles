@@ -2,5 +2,8 @@
 normal = { family = "MesloLGM Nerd Font", style = "Regular" }
 
 [window]
-opacity = 0.6
-blur = true
+# opacity = 0.6
+# blur = true
+
+[colors.primary]
+background = "#000000" # default is #181818
