@@ -235,3 +235,7 @@ automatically-unhide-macos-hidden-apps = false
     if.app-id = 'md.obsidian'
     run = 'move-node-to-workspace N' # N = Notes
 
+[[on-window-detected]]
+    if.app-id = 'com.lightspeedhq.retailposx.inhouse.main'
+    run = 'layout floating'
+
