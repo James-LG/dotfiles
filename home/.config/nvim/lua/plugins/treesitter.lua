@@ -21,6 +21,7 @@ return {
                 "regex",
                 "toml",
                 "typescript",
+                "tsx",
                 "vim",
                 "xml",
                 "yaml",
@@ -33,4 +34,3 @@ return {
         end,
     },
 }
-
