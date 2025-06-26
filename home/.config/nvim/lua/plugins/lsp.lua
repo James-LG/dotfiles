@@ -37,7 +37,7 @@ return {
             automatic_enable = true,
             ensure_installed = {
                 "lua_ls",
-                "gopls",
+                "codespell"
             },
         })
         -- END remove mason on nixos
