@@ -4,6 +4,7 @@ return {
         -- BEGIN remove mason on nixos
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         -- END remove mason on nixos
         "stevearc/conform.nvim",
         "hrsh7th/cmp-nvim-lsp",
@@ -35,10 +36,12 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             automatic_enable = true,
+        })
+        require("mason-tool-installer").setup({
             ensure_installed = {
                 "lua_ls",
                 "codespell"
-            },
+            }
         })
         -- END remove mason on nixos
 
