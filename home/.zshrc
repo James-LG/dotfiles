@@ -1,14 +1,19 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+#
+# Antigen installation
+# Load Antigen
+source ~/antigen.zsh
+antigen init ~/.antigenrc
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Set default editor to nvim
 export VISUAL=nvim
@@ -74,9 +79,10 @@ export EDITOR="$VISUAL"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting zsh-autosuggestions git 1password fzf z)
-
-source $ZSH/oh-my-zsh.sh
+#
+# DISABLED - do this is in .antigenrc instead
+# plugins=(zsh-syntax-highlighting zsh-autosuggestions git 1password fzf z)
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
