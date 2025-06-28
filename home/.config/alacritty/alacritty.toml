@@ -1,9 +1,15 @@
 [font]
 normal = { family = "MesloLGM Nerd Font", style = "Regular" }
+size = 8
 
 [window]
-# opacity = 0.6
-# blur = true
+opacity = 0.8
+blur = true
+decorations = "None"
 
 [colors.primary]
 background = "#000000" # default is #181818
+
+[mouse]
+hide_when_typing = true
+

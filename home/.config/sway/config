@@ -15,7 +15,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 # Recommends: foot
-set $term foot
+set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -31,7 +31,7 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg, jxl-pixbuf-loader
-output * bg /home/jameslg/Pictures/wallpaper.jpeg fill
+output * bg /usr/share/backgrounds/wallpaper.jpeg fill
 #
 # Example configuration:
 #
@@ -69,6 +69,11 @@ output * bg /home/jameslg/Pictures/wallpaper.jpeg fill
 input type:touchpad {
   natural_scroll enabled
   scroll_factor 0.5
+}
+
+input type:pointer {
+  accel_profile "flat"
+  pointer_accel 0.5
 }
 
 ### Key bindings
@@ -211,7 +216,24 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-exec_always systemctl --user start sway-session.target
+exec_always systemctl --user start sway-session.service
+
+#
+# Monitors
+#
+    set $output_laptop eDP-1
+    set $output_lg DP-3
+    set $output_acer DP-2
+
+    bindsym $mod+Ctrl+1 move workspace to output $output_laptop
+    bindsym $mod+Ctrl+2 move workspace to output $output_lg
+    bindsym $mod+Ctrl+3 move workspace to output $output_acer
+
+    output $output_laptop pos 0 480
+    output $output_lg pos 1440 0
+    output $output_acer pos 4000 180
+
+    workspace Terminal output $output_lg
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
