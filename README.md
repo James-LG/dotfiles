@@ -26,8 +26,16 @@ sudo dnf install perl-FindBin perl-IPC-Cmd perl-File-Compare
 cargo install tmux-sessionizer
 ```
 
+Installing lazygit
+
+```sh
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
+```
+
 ## Framework laptop Wifi issues
 
+```
 🔍 Analyzing modern disconnection patterns...
 🛠️ === MODERN DISCONNECTION FIXES ===
 
@@ -54,3 +62,4 @@ cargo install tmux-sessionizer
 
 💡 TIP: Save these modern commands for future use!
 📋 All solutions are tailored for your Fedora Linux 42 (Sway) system
+```

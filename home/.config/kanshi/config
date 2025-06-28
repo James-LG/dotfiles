@@ -1,14 +1,17 @@
-output 'BOE NE135A1M-NY1 Unknown' {
+# Laptop
+output 'eDP-1' {
     position 0,480
     alias $INTERNAL
 }
 
-output 'LG Electronics LG ULTRAGEAR+ 404NTCZD1195' {
+# OLED
+output 'DP-3' {
     position 1440,0
     alias $HOME_1
 }
 
-output 'Acer Technologies Acer XF240H 0x71606395' {
+# Acer
+output 'DP-2' {
     position 4000,180
     alias $HOME_2
 }
@@ -17,4 +20,5 @@ profile home_1 {
     output $INTERNAL enable
     output $HOME_1 enable
     output $HOME_2 enable
+    exec swaymsg workspace Terminal, move workspace to DP-3
 }
