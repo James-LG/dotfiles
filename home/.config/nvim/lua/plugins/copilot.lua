@@ -10,9 +10,9 @@ return {
             suggestion = {
                 auto_trigger = true,
                 keymap = {
-                    accept = "<M-y>",
-                    next = "<M-]>",
-                    prev = "<M-[>"
+                    accept = "<C-y>",
+                    next = "<C-n>",
+                    prev = "<C-p>"
                 }
             }
         })
