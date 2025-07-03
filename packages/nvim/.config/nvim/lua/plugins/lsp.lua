@@ -36,12 +36,16 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             automatic_enable = true,
+            ensure_installed = {
+                "ts_ls",
+                "lua_ls",
+                "eslint",
+            },
         })
         require("mason-tool-installer").setup({
             ensure_installed = {
-                "lua_ls",
-                "codespell"
-            }
+                "codespell",
+            },
         })
         -- END remove mason on nixos
 
