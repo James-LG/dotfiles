@@ -2,7 +2,7 @@ return {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     config = function()
-        require('copilot').setup({
+        require("copilot").setup({
             panel = {
                 enabled = true,
                 auto_refresh = true,
@@ -10,11 +10,11 @@ return {
             suggestion = {
                 auto_trigger = true,
                 keymap = {
-                    accept = "<C-y>",
-                    next = "<C-n>",
-                    prev = "<C-p>"
-                }
-            }
+                    accept = "<C-j>",
+                    next = "<C-k>",
+                    prev = "<C-h>",
+                },
+            },
         })
-    end
+    end,
 }
