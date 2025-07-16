@@ -27,6 +27,7 @@ return {
                 "yaml",
                 "rust",
                 "nix",
+                "go",
             },
         },
         config = function(_, opts)
