@@ -37,6 +37,7 @@ return {
         require("mason-lspconfig").setup({
             automatic_enable = true,
             ensure_installed = {
+                "gopls",
                 "ts_ls",
                 "lua_ls",
                 "eslint",
@@ -59,6 +60,8 @@ return {
 
         -- extra keybinds
         vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+        vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to definition" })
+        vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 
         -- completions
         local cmp_select = { behavior = cmp.SelectBehavior.Select }

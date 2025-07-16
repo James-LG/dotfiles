@@ -3,14 +3,16 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         require("todo-comments").setup({
+            -- merge_keywords = false, -- disable default keywords and only use custom ones
             keywords = {
                 JAMES = { icon = "J", color = "info" },
             },
             highlight = {
-                pattern = [[.*<(KEYWORDS)\(james\):]], -- vim regex
+                keyword = "bg",
+                pattern = [[.*(KEYWORDS)\(james\)\s*:]], -- vim regex
             },
             search = {
-                pattern = [[\b(KEYWORDS)\(james\):]], -- ripgrep regex
+                pattern = [[\b(KEYWORDS)\s*\(james\)\s*:]], -- ripgrep regex
             },
         })
     end,
