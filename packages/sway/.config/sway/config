@@ -139,6 +139,7 @@ input type:pointer {
     set $ws9 "9"
     set $ws10 "10: System"
     set $wst "Terminal"
+    set $wsn "Notes"
 
     # Switch to workspace
     bindsym $mod+1 workspace number $ws1
@@ -152,6 +153,7 @@ input type:pointer {
     bindsym $mod+9 workspace number $ws9
     bindsym $mod+0 workspace number $ws10
     bindsym $mod+t workspace $wst
+    bindsym $mod+n workspace $wsn
 
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -165,10 +167,12 @@ input type:pointer {
     bindsym $mod+Shift+9 move container to workspace number $ws9
     bindsym $mod+Shift+0 move container to workspace number $ws10
     bindsym $mod+Shift+t move container to workspace $wst
+    bindsym $mod+Shift+n move container to workspace $wsn
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
     # Application assignments
+    # use xprop to get the class of a window
     assign [class="Spotify"] $ws3
 #
 # Layout stuff:
