@@ -1,11 +1,19 @@
 return {
     {
+        enabled = true,
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         lazy = false,
         opts = {
             highlight = { enable = true },
-            indent = { enable = true },
+            indent = {
+                enable = true, -- Keep Treesitter indentation generally enabled
+                disable = {
+                    "typescript", -- Disable Treesitter indent for TypeScript
+                    "typescriptreact", -- Disable Treesitter indent for TSX
+                    -- Add other filetypes where you want .editorconfig/formatters to rule
+                },
+            },
             ensure_installed = {
                 "bash",
                 "c",

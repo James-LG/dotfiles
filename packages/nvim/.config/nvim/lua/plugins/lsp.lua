@@ -1,4 +1,5 @@
 return {
+    enabled = true,
     "neovim/nvim-lspconfig",
     dependencies = {
         -- BEGIN remove mason on nixos
@@ -45,6 +46,8 @@ return {
         })
         require("mason-tool-installer").setup({
             ensure_installed = {
+                "prettierd",
+                "stylua",
                 "codespell",
             },
         })
@@ -57,6 +60,24 @@ return {
         -- require('lspconfig').ts_ls.setup({})
         -- require('lspconfig').nil_ls.setup({})
         -- require('lspconfig').elixirls.setup({})
+        require("lspconfig").ts_ls.setup({
+            settings = {
+                typescript = {
+                    format = {
+                        indentSize = 2,
+                        tabSize = 2,
+                        preferEditorConfig = true,
+                    },
+                },
+                javascript = {
+                    format = {
+                        indentSize = 2,
+                        tabSize = 2,
+                        preferEditorConfig = true,
+                    },
+                },
+            },
+        })
 
         -- extra keybinds
         vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
