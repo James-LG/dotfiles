@@ -57,5 +57,6 @@ return {
         end, { desc = "Search with live grep args" })
         vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Search help tags" })
         vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Search buffers" })
+        vim.keymap.set("n", "<leader>pr", builtin.resume, { desc = "Resume previous search" })
     end,
 }
