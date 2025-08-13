@@ -3,6 +3,20 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-live-grep-args.nvim",
+        {
+            "danielfalk/smart-open.nvim",
+            branch = "0.2.x",
+            config = function()
+                require("telescope").load_extension("smart_open")
+            end,
+            dependencies = {
+                "kkharji/sqlite.lua",
+                -- -- Only required if using match_algorithm fzf
+                -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+                -- -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+                -- { "nvim-telescope/telescope-fzy-native.nvim" },
+            },
+        },
     },
     config = function()
         local telescope = require("telescope")
@@ -58,5 +72,9 @@ return {
         vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Search help tags" })
         vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Search buffers" })
         vim.keymap.set("n", "<leader>pr", builtin.resume, { desc = "Resume previous search" })
+
+        vim.keymap.set("n", "<leader>p<leader>", function()
+            telescope.extensions.smart_open.smart_open()
+        end, { noremap = true, silent = true })
     end,
 }
