@@ -36,7 +36,11 @@ return {
         -- BEGIN remove mason on nixos
         require("mason").setup()
         require("mason-lspconfig").setup({
-            automatic_enable = true,
+            automatic_enable = {
+                exclude = {
+                    "ts_ls",
+                },
+            },
             ensure_installed = {
                 "gopls",
                 "ts_ls",
