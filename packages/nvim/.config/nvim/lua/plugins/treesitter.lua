@@ -4,6 +4,9 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         lazy = false,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
         opts = {
             highlight = { enable = true },
             indent = {
@@ -36,6 +39,17 @@ return {
                 "rust",
                 "nix",
                 "go",
+            },
+            textobjects = {
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ["<leader>s"] = { query = "@parameter.inner", desc = "Swap next parameter" },
+                    },
+                    swap_previous = {
+                        ["<leader>S"] = { query = "@parameter.inner", desc = "Swap previous parameter" },
+                    },
+                },
             },
         },
         config = function(_, opts)
