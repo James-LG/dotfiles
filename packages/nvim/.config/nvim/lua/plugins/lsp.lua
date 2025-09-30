@@ -64,7 +64,7 @@ return {
         -- require('lspconfig').ts_ls.setup({})
         -- require('lspconfig').nil_ls.setup({})
         -- require('lspconfig').elixirls.setup({})
-        require("lspconfig").ts_ls.setup({
+        vim.lsp.config("ts_ls", {
             settings = {
                 typescript = {
                     format = {
@@ -82,6 +82,7 @@ return {
                 },
             },
         })
+        vim.lsp.enable("ts_ls")
 
         -- extra keybinds
         vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
