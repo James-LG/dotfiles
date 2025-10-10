@@ -15,6 +15,8 @@ return {
                     vim.keymap.set(mode, l, r, opts)
                 end
 
+                map("n", "<leader>hd", gitsigns.diffthis, { desc = "Git diff this" })
+
                 map("n", "<leader>hb", function()
                     gitsigns.blame_line({ full = true })
                 end, { desc = "Git blame line" })
