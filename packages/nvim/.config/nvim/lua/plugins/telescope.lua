@@ -73,8 +73,26 @@ return {
         vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Search buffers" })
         vim.keymap.set("n", "<leader>pr", builtin.resume, { desc = "Resume previous search" })
 
+        function vim.getVisualSelection()
+            vim.cmd('noau normal! "vy"')
+            local text = vim.fn.getreg("v")
+            vim.fn.setreg("v", {})
+
+            text = string.gsub(text, "\n", "")
+            if #text > 0 then
+                return text
+            else
+                return ""
+            end
+        end
+
+        vim.keymap.set("x", "<leader>ps", function()
+            local text = vim.getVisualSelection()
+            builtin.live_grep({ default_text = text })
+        end)
+
         vim.keymap.set("n", "<leader>p<leader>", function()
-            telescope.extensions.smart_open.smart_open()
+            telescope.extensions.smart_open.smart_open({ cwd_only = true })
         end, { noremap = true, silent = true })
     end,
 }
