@@ -115,6 +115,7 @@ export EDITOR="$VISUAL"
 alias vi="nvim"
 alias vim="nvim"
 alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
+alias obsidian-sync="~/.config/systemd/user/obsidian-sync.sh"
 
 # Plugin Settings
 bindkey '^Y' autosuggest-accept
