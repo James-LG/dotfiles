@@ -23,15 +23,14 @@ return {
             formatters_by_ft = {},
         })
         local cmp = require("cmp")
-        local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities()
-        )
 
-        require("fidget").setup({})
+        require("fidget").setup({
+            notification = {
+                window = {
+                    avoid = { "NvimTree" },
+                },
+            },
+        })
 
         -- BEGIN remove mason on nixos
         require("mason").setup()

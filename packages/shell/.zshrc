@@ -120,6 +120,14 @@ alias obsidian-sync="~/.config/systemd/user/obsidian-sync.sh"
 # Plugin Settings
 bindkey '^Y' autosuggest-accept
 
+# cargo
+export CARGO_HOME="$HOME/.cargo/bin"
+case ":$PATH:" in
+  *":$CARGO_HOME:"*) ;;
+  *) export PATH="$CARGO_HOME:$PATH" ;;
+esac
+# cargo end
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
