@@ -1,5 +1,6 @@
 return {
     "nvim-neotest/neotest",
+    enabled = true,
     dependencies = {
         "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
@@ -7,7 +8,6 @@ return {
         {
             "fredrikaverpil/neotest-golang",
             version = "*", -- Optional, but recommended; track releases
-            dependencies = { "leoluz/nvim-dap-go" },
             build = function()
                 vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
             end,
