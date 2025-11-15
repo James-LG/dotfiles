@@ -141,3 +141,11 @@ if command -v go >/dev/null 2>&1; then
   export PATH=$PATH:$(go env GOPATH)/bin
 fi
 # go end
+
+# mason
+export MASON_HOME="$HOME/.local/share/nvim/mason/bin"
+case ":$PATH:" in
+    *":$MASON_HOME:"*) ;;
+    *) export PATH="$MASON_HOME:$PATH" ;;
+esac
+# mason end

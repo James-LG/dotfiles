@@ -6,8 +6,7 @@ return {
             -- Installs and configures debug adapters
             {
                 "jay-babu/mason-nvim-dap.nvim",
-                -- Waits to load nvim-dap until mason-nvim-dap has finished
-                lazy = false,
+                dependencies = { "williamboman/mason.nvim" },
                 -- You must provide a list of debuggers to install
                 -- See :help mason-nvim-dap.ensure_installed
                 opts = {
