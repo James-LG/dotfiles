@@ -2,11 +2,9 @@ return {
     enabled = true,
     "neovim/nvim-lspconfig",
     dependencies = {
-        -- BEGIN remove mason on nixos
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        -- END remove mason on nixos
         "stevearc/conform.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
