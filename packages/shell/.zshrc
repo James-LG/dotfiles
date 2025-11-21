@@ -50,7 +50,7 @@ export EDITOR="$VISUAL"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -116,6 +116,29 @@ alias vi="nvim"
 alias vim="nvim"
 alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
 alias obsidian-sync="~/.config/systemd/user/obsidian-sync.sh"
+
+# History settings
+if [ -n "$TMUX" ]; then
+    # Check if we are inside a tmux session
+    # Get the current tmux session name (#S)
+    TMUX_SESSION_NAME=$(tmux display-message -p '#S')
+    
+    # Set the history file path to include the session name
+    export HISTFILE=~/.zsh_history_tmux_$TMUX_SESSION_NAME
+else
+    # Default history file when not in tmux
+    export HISTFILE=~/.zsh_history
+fi
+
+# Ensure history settings are configured for this specific file
+# Set history size
+HISTSIZE=100000
+SAVEHIST=100000
+
+# Recommended Zsh options for history separation
+setopt NO_SHARE_HISTORY  # Ensure history is NOT shared (important!)
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_DUPS
 
 # Plugin Settings
 bindkey '^Y' autosuggest-accept
