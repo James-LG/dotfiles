@@ -281,7 +281,7 @@
 	"format-icons": [
 		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
 	],
-	"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nmtui"
+	"on-click": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nmtui"
 },
 
 "network#speed": {

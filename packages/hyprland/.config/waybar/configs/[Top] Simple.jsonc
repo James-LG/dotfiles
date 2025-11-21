@@ -36,6 +36,8 @@
 	"hyprland/window",  
 	"battery",
  	"group/audio", 
+    "network",
+    "bluetooth",
 	"custom/power",
 	],
 }
