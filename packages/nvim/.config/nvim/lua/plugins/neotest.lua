@@ -11,6 +11,18 @@ return {
             build = function()
                 vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
             end,
+            config = function()
+                require("neotest-golang")({
+                    dap_mode = "manual",
+                    dap_manual_config = {
+                        type = "delve",
+                        name = "Debug Nearest Test",
+                        request = "launch",
+                        mode = "test",
+                        program = "${file}",
+                    },
+                })
+            end,
         },
     },
     config = function()
