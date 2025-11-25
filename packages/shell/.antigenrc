@@ -9,9 +9,15 @@ antigen bundle z
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zaw
 
 # Select theme.
 antigen theme robbyrussell
 
 # Tell Antigen that you're done.
 antigen apply
+
+# Settings
+bindkey '^X' zaw
+bindkey '^R' zaw-history
+bindkey '^Y' autosuggest-accept

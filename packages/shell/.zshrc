@@ -136,12 +136,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 # Recommended Zsh options for history separation
-setopt NO_SHARE_HISTORY  # Ensure history is NOT shared (important!)
-setopt EXTENDED_HISTORY
-setopt HIST_IGNORE_DUPS
-
-# Plugin Settings
-bindkey '^Y' autosuggest-accept
+setopt append_history
 
 # cargo
 export CARGO_HOME="$HOME/.cargo/bin"
