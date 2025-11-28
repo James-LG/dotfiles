@@ -346,3 +346,25 @@ label:focus {
 	min-height: 10px;
 	border-radius: 5px;
 }
+
+/* Base style for the TLP module */
+#custom-tlp-profile {
+    padding: 0 10px;
+    color: #ffffff; /* Default color */
+}
+
+/* Style for PowerSave profile */
+#custom-tlp-profile.tlp-powersave {
+    color: #387085; /* Blue/Green for power saving */
+}
+
+/* Style for Performance profile */
+#custom-tlp-profile.tlp-performance {
+    color: #e67e22; /* Orange for performance */
+    font-weight: bold;
+}
+
+/* Style for other governors */
+#custom-tlp-profile.tlp-other {
+    color: #7f8c8d; /* Grey for unknown/other */
+}
