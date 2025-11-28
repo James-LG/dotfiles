@@ -181,6 +181,16 @@
 	"on-click-right": "swaync-client -d -sw",
 	"escape": true,
 },
+
+"custom/tlp-profile": {
+    "exec": "$HOME/.config/hypr/scripts/tlp-profile.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5, // Update every 5 seconds
+    "tooltip": true,
+    "on-click": "kitty -e tlp-stat -p", // Example: Open a terminal to show full TLP status on click
+    "on-click-right": "tlp start" // Example: Run TLP start on right-click (be cautious with actions)
+},
 // NOTE:! This is mainly for Arch and Arch Based Distros  depend: pacman-contrib
 // Other Distro dont have notifications but can use to check for update for any other distro
 "custom/updater": {

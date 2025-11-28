@@ -38,13 +38,13 @@
 		"transition-duration": 500,
 		"children-class": "cpu",
 		"transition-left-to-right": true
-        },
+    },
 	"modules": [
 		"temperature",		
 		"cpu",
-		"power-profiles-daemon",	
 		"memory",
 		"disk",
+		"custom/tlp-profile",	
 	]
 },
 "group/laptop": {
