@@ -5,7 +5,7 @@
 GOVERNOR=$(cat /sys/firmware/acpi/platform_profile)
 
 # You can adjust the output format to your liking (e.g., with icons)
-if [ "$GOVERNOR" = "powersave" ]; then
+if [ "$GOVERNOR" = "powersave" ] || [ "$GOVERNOR" = "low-power" ]; then
     TEXT=" TLP: PowerSave" # Replace  with your preferred icon
     CLASS="tlp-powersave"
 elif [ "$GOVERNOR" = "performance" ]; then
