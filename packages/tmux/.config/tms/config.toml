@@ -2,4 +2,4 @@
 search_paths = ["~/code"]
 
 # non-git repo paths to add
-bookmarks = []
+bookmarks = ["~/Documents/obsidian"]
