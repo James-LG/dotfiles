@@ -115,7 +115,6 @@ ENABLE_CORRECTION="true"
 alias vi="nvim"
 alias vim="nvim"
 alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
-alias obsidian-sync="~/.config/systemd/user/obsidian-sync.sh"
 
 # History settings
 if [ -n "$TMUX" ]; then
@@ -167,3 +166,8 @@ case ":$PATH:" in
     *) export PATH="$MASON_HOME:$PATH" ;;
 esac
 # mason end
+
+# Run environment.sh to load environment variables
+if [ -f "$HOME/.env.sh" ]; then
+    source "$HOME/.env.sh"
+fi

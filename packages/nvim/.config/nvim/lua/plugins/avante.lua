@@ -5,9 +5,6 @@ return {
     version = false, -- Never set this value to "*"! Never!
     ---@module 'avante'
     ---@type avante.Config
-    opts = {
-        provider = "copilot",
-    },
     dependencies = {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
@@ -18,4 +15,12 @@ return {
         "MeanderingProgrammer/render-markdown.nvim", -- markdown rendering
         "HakonHarnes/img-clip.nvim", -- image pasting
     },
+    config = function()
+        local ai_provider = os.getenv("AVANTE_AI_PROVIDER") or "copilot"
+
+        require("avante").setup({
+            provider = ai_provider,
+            -- other shared avante settings
+        })
+    end,
 }
