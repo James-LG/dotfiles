@@ -137,6 +137,9 @@ return {
             vim.keymap.set("v", "<leader>dw", function()
                 dapview.add_expr()
             end, { desc = "DAP: Add to watch" })
+            vim.keymap.set("n", "<leader>dv", function()
+                dapview.toggle()
+            end, { desc = "DAP: Toggle view" })
 
             -- Automatically open/close DAP UI when a session starts/ends
             local dap = require("dap")

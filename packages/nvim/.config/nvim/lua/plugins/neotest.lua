@@ -21,6 +21,7 @@ return {
                         mode = "test",
                         program = "${file}",
                     },
+                    warn_test_name_dupes = false,
                 })
             end,
         },
