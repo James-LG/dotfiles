@@ -41,6 +41,7 @@ return {
         require("avante").setup({
             debug = false,
             provider = ai_provider,
+            auto_suggestions_provider = "openrouter",
             providers = {
                 gemini = {
                     model = "gemini-2.5-flash",
@@ -48,6 +49,15 @@ return {
                 copilot = {
                     model = "gpt-4o",
                 },
+                openrouter = {
+                    __inherited_from = "openai",
+                    endpoint = "https://openrouter.ai/api/v1",
+                    api_key_name = "AVANTE_OPENROUTER_API_KEY", -- Or your actual API key name
+                    model = "anthropic/claude-sonnet-4.5", -- Or your preferred model
+                },
+            },
+            behaviour = {
+                auto_suggestions = false,
             },
             web_search_engine = {
                 provider = "google",
