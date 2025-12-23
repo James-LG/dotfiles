@@ -137,13 +137,15 @@ SAVEHIST=100000
 # Recommended Zsh options for history separation
 setopt append_history
 
+# local bin
+export PATH="$HOME/.local/bin:$PATH"
+
 # cargo
 export CARGO_HOME="$HOME/.cargo/bin"
 case ":$PATH:" in
   *":$CARGO_HOME:"*) ;;
   *) export PATH="$CARGO_HOME:$PATH" ;;
 esac
-# cargo end
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -151,13 +153,11 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 # go
 if command -v go >/dev/null 2>&1; then
   export PATH=$PATH:$(go env GOPATH)/bin
 fi
-# go end
 
 # mason
 export MASON_HOME="$HOME/.local/share/nvim/mason/bin"
@@ -165,7 +165,6 @@ case ":$PATH:" in
     *":$MASON_HOME:"*) ;;
     *) export PATH="$MASON_HOME:$PATH" ;;
 esac
-# mason end
 
 # Run environment.sh to load environment variables
 if [ -f "$HOME/.env.sh" ]; then
