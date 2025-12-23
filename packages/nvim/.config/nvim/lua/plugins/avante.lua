@@ -1,5 +1,6 @@
 return {
     "yetone/avante.nvim",
+    enabled = os.getenv("AVANTE_ENABLED") == "true",
     event = "VeryLazy",
     build = "make",
     version = false, -- Never set this value to "*"! Never!
