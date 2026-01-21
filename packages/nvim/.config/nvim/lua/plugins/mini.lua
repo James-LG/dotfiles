@@ -8,5 +8,6 @@ return {
             spell = { suffix = "" }, -- Disable spell navigation to free up [s and ]s
         })
         require("mini.splitjoin").setup()
+        require("mini.surround").setup()
     end,
 }
