@@ -2,7 +2,7 @@ return {
     "shortcuts/no-neck-pain.nvim",
     config = function()
         require("no-neck-pain").setup({
-            width = 250,
+            width = math.floor(vim.o.columns * 0.55),
             -- Creates mappings for you to easily interact with the exposed commands.
             ---@type table
             mappings = {

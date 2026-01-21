@@ -15,15 +15,15 @@ return {
                     vim.keymap.set(mode, l, r, opts)
                 end
 
-                map("n", "<leader>hd", gitsigns.diffthis, { desc = "Git diff this" })
+                map("n", "<leader>gd", gitsigns.diffthis, { desc = "Git diff this" })
 
-                map("n", "<leader>hb", function()
+                map("n", "<leader>gb", function()
                     gitsigns.blame_line({ full = true })
                 end, { desc = "Git blame line" })
 
                 -- toggles
-                map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-                map("n", "<leader>tw", gitsigns.toggle_word_diff)
+                map("n", "<leader>gtb", gitsigns.toggle_current_line_blame, { desc = "Toggle git blame" })
+                map("n", "<leader>gtw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
             end,
         })
     end,
