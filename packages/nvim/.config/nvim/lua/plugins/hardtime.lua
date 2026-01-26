@@ -11,5 +11,8 @@ return {
             ["<Left>"] = false,
             ["<Right>"] = false,
         },
+        disabled_filetypes = {
+            ["codediff.*"] = true,
+        },
     },
 }
