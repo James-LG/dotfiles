@@ -9,12 +9,15 @@ mkdir -p "$DOTFILES_EXTRAS_DIR"
 
 echo "Syncing Obsidian settings, templates, and scripts to dotfiles-extras..."
 
-# Sync .obsidian settings (excluding workspace, cache, and plugin binaries)
+# Sync .obsidian settings (excluding workspace, cache, and plugin/theme binaries)
 rsync -av --delete \
     --exclude 'workspace.json' \
     --exclude 'workspace-*.json' \
     --exclude 'cache/' \
-    --exclude 'plugins/' \
+    --include 'plugins/' \
+    --include 'plugins/*/' \
+    --include 'plugins/*/data.json' \
+    --exclude 'plugins/*/*' \
     --exclude 'themes/' \
     "$OBSIDIAN_DIR/.obsidian/" "$DOTFILES_EXTRAS_DIR/.obsidian/"
 
