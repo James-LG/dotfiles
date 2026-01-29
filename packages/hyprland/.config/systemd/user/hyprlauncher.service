@@ -1,0 +1,14 @@
+[Unit]
+Description=Hyprlauncher - Application launcher for Hyprland
+Documentation=https://github.com/hyprutils/hyprlauncher
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/hyprlauncher -d
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
