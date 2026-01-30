@@ -1,0 +1,157 @@
+# Example Code Review
+
+This example demonstrates the expected output format.
+
+---
+
+### 🔴 CRITICAL Security: SQL Injection Vulnerability
+
+**Location:** `src/users/repository.ts:87`
+
+**Issue:** User input interpolated directly into SQL query.
+
+**Why it matters:** Attackers can execute arbitrary SQL, leading to data theft or deletion.
+
+**Suggestion:**
+```typescript
+// Before
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+
+// After - use parameterized query
+const query = 'SELECT * FROM users WHERE id = $1';
+const result = await db.query(query, [userId]);
+```
+
+---
+
+### 🔴 CRITICAL Logic: Race Condition in Balance Update
+
+**Location:** `src/accounts/service.ts:45-52`
+
+**Issue:** Balance is read, modified, then written without locking. Concurrent requests can cause lost updates.
+
+**Why it matters:** Users could lose money or overdraw accounts when parallel transactions occur.
+
+**Suggestion:**
+Use a database transaction with row-level locking:
+```typescript
+// Before
+const account = await db.accounts.findOne(id);
+account.balance += amount;
+await db.accounts.save(account);
+
+// After
+await db.transaction(async (tx) => {
+  const account = await tx.accounts.findOne(id, { lock: 'FOR UPDATE' });
+  account.balance += amount;
+  await tx.accounts.save(account);
+});
+```
+
+---
+
+### 🟠 MAJOR Design: God Function
+
+**Location:** `src/orders/service.ts:145-280`
+
+**Issue:** `processOrder()` handles validation, pricing, inventory, payment, and notifications in 135 lines.
+
+**Why it matters:** Difficult to test, understand, and modify. Changes to notifications risk breaking payment logic.
+
+**Suggestion:**
+Extract into focused functions:
+1. `validateOrder(order): ValidationResult`
+2. `calculatePricing(order, discounts): PricingDetails`
+3. `reserveInventory(items): ReservationResult`
+4. `processPayment(order, pricing): PaymentResult`
+5. `sendConfirmation(order, result): void`
+
+Compose in `processOrder()` with early returns on failure.
+
+---
+
+### 🟠 MAJOR Code Quality: Duplicated Validation Logic
+
+**Location:** `src/api/users.ts:34-48`, `src/api/admin.ts:67-81`
+
+**Issue:** Email and phone validation logic copied between two handlers with slight variations.
+
+**Why it matters:** Bug fixes must be applied in multiple places. Variations may cause inconsistent behavior.
+
+**Suggestion:**
+Extract to a shared validator:
+```typescript
+// src/validation/contact.ts
+export function validateContactInfo(data: ContactInput): ValidationResult {
+  const errors: string[] = [];
+  if (!isValidEmail(data.email)) errors.push('Invalid email format');
+  if (data.phone && !isValidPhone(data.phone)) errors.push('Invalid phone format');
+  return { valid: errors.length === 0, errors };
+}
+```
+
+---
+
+### 🟡 MINOR Style: Inconsistent Naming
+
+**Location:** `src/utils/helpers.ts:12, 28, 45`
+
+**Issue:** Mixed naming conventions: `getUserData`, `fetch_user_prefs`, `LoadUserSettings`.
+
+**Why it matters:** Inconsistency increases cognitive load and makes codebase feel unprofessional.
+
+**Suggestion:**
+Standardize on camelCase (matching project convention):
+- `fetch_user_prefs` → `fetchUserPrefs`
+- `LoadUserSettings` → `loadUserSettings`
+
+---
+
+### 🟡 MINOR Code Quality: Magic Number
+
+**Location:** `src/auth/token.ts:23`
+
+**Issue:** `const expiry = Date.now() + 86400000` — unclear what this number represents.
+
+**Why it matters:** Future developers must calculate or guess. Easy to introduce errors when modifying.
+
+**Suggestion:**
+```typescript
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const expiry = Date.now() + ONE_DAY_MS;
+```
+
+---
+
+### 🔵 NIT Documentation: Missing JSDoc on Public Function
+
+**Location:** `src/api/orders.ts:12`
+
+**Issue:** `createOrder()` is exported but has no documentation.
+
+**Why it matters:** Consumers of this API must read implementation to understand expected input/output.
+
+**Suggestion:**
+```typescript
+/**
+ * Creates a new order for the given customer.
+ * @param customerId - The customer placing the order
+ * @param items - Array of items with productId and quantity
+ * @returns The created order with generated ID and calculated totals
+ * @throws {ValidationError} If items array is empty or quantities invalid
+ */
+export async function createOrder(customerId: string, items: OrderItem[]): Promise<Order>
+```
+
+---
+
+## Summary
+
+| Severity | Count |
+|----------|-------|
+| 🔴 Critical | 2 |
+| 🟠 Major | 2 |
+| 🟡 Minor | 2 |
+| 🔵 Nit | 1 |
+
+**Overall:** The code has some critical security and concurrency issues that must be addressed before merging. The design issues are worth refactoring but could be tracked as follow-up work. Good use of TypeScript types throughout.
