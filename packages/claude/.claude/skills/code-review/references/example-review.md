@@ -4,7 +4,7 @@ This example demonstrates the expected output format.
 
 ---
 
-### 🔴 CRITICAL Security: SQL Injection Vulnerability
+### 1. 🔴 CRITICAL Security: SQL Injection Vulnerability
 
 **Location:** `src/users/repository.ts:87`
 
@@ -24,7 +24,7 @@ const result = await db.query(query, [userId]);
 
 ---
 
-### 🔴 CRITICAL Logic: Race Condition in Balance Update
+### 2. 🔴 CRITICAL Logic: Race Condition in Balance Update
 
 **Location:** `src/accounts/service.ts:45-52`
 
@@ -50,7 +50,7 @@ await db.transaction(async (tx) => {
 
 ---
 
-### 🟠 MAJOR Design: God Function
+### 3. 🟠 MAJOR Design: God Function
 
 **Location:** `src/orders/service.ts:145-280`
 
@@ -70,7 +70,7 @@ Compose in `processOrder()` with early returns on failure.
 
 ---
 
-### 🟠 MAJOR Code Quality: Duplicated Validation Logic
+### 4. 🟠 MAJOR Code Quality: Duplicated Validation Logic
 
 **Location:** `src/api/users.ts:34-48`, `src/api/admin.ts:67-81`
 
@@ -92,7 +92,7 @@ export function validateContactInfo(data: ContactInput): ValidationResult {
 
 ---
 
-### 🟡 MINOR Style: Inconsistent Naming
+### 5. 🟡 MINOR Style: Inconsistent Naming
 
 **Location:** `src/utils/helpers.ts:12, 28, 45`
 
@@ -107,7 +107,7 @@ Standardize on camelCase (matching project convention):
 
 ---
 
-### 🟡 MINOR Code Quality: Magic Number
+### 6. 🟡 MINOR Code Quality: Magic Number
 
 **Location:** `src/auth/token.ts:23`
 
@@ -123,7 +123,7 @@ const expiry = Date.now() + ONE_DAY_MS;
 
 ---
 
-### 🔵 NIT Documentation: Missing JSDoc on Public Function
+### 7. 🔵 NIT Documentation: Missing JSDoc on Public Function
 
 **Location:** `src/api/orders.ts:12`
 

@@ -92,10 +92,10 @@ Evaluate each category. Skip categories not applicable to the change.
 
 ## Output Format
 
-Return a prioritized list grouped by severity. For each issue:
+Return a numbered list prioritized by severity. For each issue:
 
 ```
-### [SEVERITY] Category: Brief Title
+### N. [SEVERITY] Category: Brief Title
 
 **Location:** `file.ts:42` or `file.ts:42-50`
 
@@ -109,6 +109,8 @@ Return a prioritized list grouped by severity. For each issue:
 
 [Code block if applicable]
 ```
+
+Number suggestions sequentially starting from 1 across all severity groups.
 
 **Severity levels:**
 - 🔴 **CRITICAL** — Bugs, security issues, data loss risks. Must fix.
