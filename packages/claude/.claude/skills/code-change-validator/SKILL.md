@@ -93,12 +93,13 @@ If tests fail, note the failures for later regression test writing.
 ### If e2e/integration test infrastructure exists:
 
 1. **Read the project's test docs** to understand conventions (file location, naming, setup/teardown, fixtures)
-2. **Write test cases** in the existing framework that cover:
+2. **Search for existing tests** that already cover the changed behavior. Look in the project's test directories for tests that reference the modified functions, classes, endpoints, or components. If adequate coverage already exists, run those tests and skip to documenting results.
+3. **Write test cases only for uncovered behavior** in the existing framework that cover:
    - The changed code paths with representative inputs
    - Edge cases relevant to the changes
    - Regressions in related functionality
-3. **Run the new tests** using the project's test runner
-4. **Document any failures** — expected vs. observed behavior
+4. **Run the new tests** using the project's test runner
+5. **Document any failures** — expected vs. observed behavior
 
 ### If no e2e/integration test infrastructure exists:
 
@@ -118,6 +119,15 @@ Document any issues discovered:
 ## Step 7: Write Regression Tests
 
 **Only if issues were found** in steps 5 or 6.
+
+### Check for Existing Coverage First
+
+Before writing a new test, search the test suite for existing tests that already assert the behavior you want to guard. Look for:
+- Tests referencing the affected functions, classes, or modules by name
+- Tests whose descriptions match the expected behavior
+- Tests that exercise the same code paths with similar inputs
+
+If an existing test already covers the scenario but was not catching the issue (e.g., wrong assertion, missing edge case), **update that test** rather than adding a duplicate. Only write a new test when no existing test covers the behavior.
 
 ### Test File Location
 
