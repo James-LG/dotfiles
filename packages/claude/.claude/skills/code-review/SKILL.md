@@ -41,6 +41,18 @@ Before reviewing, understand the codebase style:
 
 3. **Note the language/framework** to apply idiomatic practices.
 
+## Deepen Context When the Diff Is Not Enough
+
+A diff alone can be misleading. Before making a suggestion, verify you have enough context to be confident it is correct. If you are unsure, read more of the repo first. Common situations that require additional context:
+
+- **Caller/callee relationships** — A function signature change may look wrong until you see how it is called. Search for usages before flagging.
+- **Shared types and interfaces** — New or modified types may conform to a pattern defined elsewhere. Read the type definitions and related files.
+- **Project conventions** — Naming, error handling, or architectural patterns may differ from common defaults. Check neighboring files and modules for precedent.
+- **Deleted or moved code** — Code that appears missing from the diff may have been relocated. Search the repo before reporting dead code or missing logic.
+- **Configuration and environment** — Behavior may depend on config files, environment variables, or feature flags not visible in the diff.
+
+**Rule:** Do not suggest a change based on assumptions the diff cannot confirm. Read the surrounding code first. A wrong suggestion is worse than no suggestion.
+
 ## Review Checklist
 
 Evaluate each category. Skip categories not applicable to the change.

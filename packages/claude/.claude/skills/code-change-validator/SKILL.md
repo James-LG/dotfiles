@@ -12,9 +12,10 @@ Validate code changes by analyzing diffs, running existing tests, performing exp
 1. **Analyze the diff** → Understand what changed
 2. **Determine intent** → Use conversation context or ask the user
 3. **Find run instructions** → Locate README, Makefile, package.json, etc.
-4. **Run existing tests** → Execute the project's test suite first
-5. **Exploratory testing** → Manually verify the changed behavior
-6. **Write regression tests** → If issues found, add tests with descriptive comments
+4. **Build the project** → Compile/build before testing to catch build errors early
+5. **Run existing tests** → Execute the project's test suite
+6. **Exploratory testing** → Manually verify the changed behavior
+7. **Write regression tests** → If issues found, add tests with descriptive comments
 
 ## Step 1: Analyze the Git Diff
 
@@ -50,9 +51,27 @@ Search for setup and run documentation in this order:
 Extract:
 - How to install dependencies
 - How to run the application
-- How to run tests
+- How to run tests (unit, integration, e2e)
+- Where and how to write e2e/integration tests (test directories, frameworks, config, conventions)
 
-## Step 4: Run Existing Tests
+## Step 4: Build the Project
+
+Before running tests, build the project to catch compilation and build errors early.
+
+Use the build command discovered in Step 3. Common patterns:
+
+| Stack | Detection | Build Command |
+|-------|-----------|---------------|
+| Node/JS | `package.json` with build script | `npm run build` |
+| TypeScript | `tsconfig.json` | `npx tsc --noEmit` or `npm run build` |
+| Python | `pyproject.toml` with build backend | `pip install -e .` or `python -m build` |
+| Rust | `Cargo.toml` | `cargo build` |
+| Go | `go.mod` | `go build ./...` |
+| Java | `pom.xml` or `build.gradle` | `mvn compile` or `gradle build` |
+
+If the build fails, fix build errors before proceeding to tests. Report any build failures that cannot be resolved.
+
+## Step 5: Run Existing Tests
 
 Detect and run the project's test suite:
 
@@ -67,9 +86,23 @@ Detect and run the project's test suite:
 
 If tests fail, note the failures for later regression test writing.
 
-## Step 5: Exploratory Testing
+## Step 6: Exploratory Testing
 
-Based on the diff analysis and stated intent:
+**Prefer the project's own test infrastructure over ad-hoc bash scripts.** If Step 3 revealed documentation or configuration for e2e/integration tests (e.g., Playwright, Cypress, Selenium, Testcontainers, or a custom harness), write new test cases there to exercise the changed behavior. This produces repeatable, CI-friendly validation instead of throwaway manual checks.
+
+### If e2e/integration test infrastructure exists:
+
+1. **Read the project's test docs** to understand conventions (file location, naming, setup/teardown, fixtures)
+2. **Write test cases** in the existing framework that cover:
+   - The changed code paths with representative inputs
+   - Edge cases relevant to the changes
+   - Regressions in related functionality
+3. **Run the new tests** using the project's test runner
+4. **Document any failures** — expected vs. observed behavior
+
+### If no e2e/integration test infrastructure exists:
+
+Fall back to manual exploratory testing:
 
 1. **Start the application** using discovered run instructions
 2. **Exercise the changed code paths** with real inputs
@@ -82,9 +115,9 @@ Document any issues discovered:
 - What behavior was observed
 - Steps to reproduce
 
-## Step 6: Write Regression Tests
+## Step 7: Write Regression Tests
 
-**Only if issues were found** in steps 4 or 5.
+**Only if issues were found** in steps 5 or 6.
 
 ### Test File Location
 

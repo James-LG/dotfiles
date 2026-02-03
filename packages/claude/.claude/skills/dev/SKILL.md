@@ -51,23 +51,15 @@ Exit plan mode and implement the approved plan. Commit to the approach agreed up
 
 ## Phase 4: Review
 
-Check if the `code-review` skill is available. If installed, trigger it against the implementation diff:
-
-```bash
-git diff HEAD~1  # or appropriate range covering the changes
-```
-
-If `code-review` is not installed, skip to Phase 6.
+Trigger the `code-review` skill against the implementation diff. The skill will review the changes as a senior staff developer and produce a numbered list of suggestions prioritized by severity.
 
 ## Phase 5: Respond to Review
 
-Check if the `code-review-response` skill is available. If installed, trigger it with the diff and the review output from Phase 4. For each suggestion:
+Trigger the `code-review-response` skill with the diff and the review output from Phase 4. For each suggestion:
 
 - **ACCEPT** — implement the fix immediately
 - **REJECT** — leave as-is, note the reasoning
 - **DISCUSS** — present to the user for a decision
-
-If `code-review-response` is not installed, review the Phase 4 output directly: implement clear improvements (bugs, security, correctness) and skip stylistic nits.
 
 ## Phase 6: Validate
 
