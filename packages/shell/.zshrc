@@ -112,6 +112,10 @@ ENABLE_CORRECTION="true"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# Git aliases (check first to avoid locking .gitconfig on parallel shell startups)
+git config --global alias.cane &>/dev/null || git config --global alias.cane 'commit --amend --no-edit'
+git config --global alias.ir &>/dev/null || git config --global alias.ir '!git cane && git push -f'
+
 alias vi="nvim"
 alias vim="nvim"
 alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
@@ -165,6 +169,9 @@ case ":$PATH:" in
     *":$MASON_HOME:"*) ;;
     *) export PATH="$MASON_HOME:$PATH" ;;
 esac
+
+# sops
+export SOPS_AGE_KEY_FILE="$HOME/.sops/age.key"
 
 # Run environment.sh to load environment variables
 if [ -f "$HOME/.env.sh" ]; then
