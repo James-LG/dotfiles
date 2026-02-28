@@ -145,7 +145,7 @@ setopt append_history
 export PATH="$HOME/.local/bin:$PATH"
 
 # cargo
-export CARGO_HOME="$HOME/.cargo/bin"
+export CARGO_HOME="$HOME/.cargo"
 case ":$PATH:" in
   *":$CARGO_HOME:"*) ;;
   *) export PATH="$CARGO_HOME:$PATH" ;;
