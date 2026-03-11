@@ -1,0 +1,6 @@
+# Claude runtime/generated files
+.claude/*
+!.claude/.gitignore
+!.claude/skills/
+# Local application state
+.local/
