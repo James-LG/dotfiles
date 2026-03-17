@@ -147,8 +147,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # cargo
 export CARGO_HOME="$HOME/.cargo"
 case ":$PATH:" in
-  *":$CARGO_HOME:"*) ;;
-  *) export PATH="$CARGO_HOME:$PATH" ;;
+  *":$CARGO_HOME/bin:"*) ;;
+  *) export PATH="$CARGO_HOME/bin:$PATH" ;;
 esac
 
 # pnpm
