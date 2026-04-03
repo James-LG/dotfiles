@@ -6,6 +6,9 @@
 source ~/antigen.zsh
 antigen init ~/.antigenrc
 
+# Prompt
+eval "$(starship init zsh)"
+
 # Path to your Oh My Zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
 
