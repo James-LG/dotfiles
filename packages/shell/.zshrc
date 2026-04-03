@@ -7,7 +7,12 @@ source ~/antigen.zsh
 antigen init ~/.antigenrc
 
 # Prompt
-eval "$(starship init zsh)"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  antigen theme robbyrussell
+  antigen apply
+fi
 
 # Path to your Oh My Zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
