@@ -1,28 +1,2 @@
-format = """
-$hostname\
-$directory\
-[\\(](purple)$git_branch$git_status[\\)](purple) \
-$cmd_duration\
-$line_break\
-$character"""
-
 [hostname]
 ssh_only = true
-format = "[\\[$hostname\\]]($style) "
-
-[directory]
-truncation_length = 3
-format = "[$path]($style) "
-
-[git_branch]
-format = "[$branch]($style)"
-
-[git_status]
-format = '[ $all_status$ahead_behind]($style)'
-
-[cmd_duration]
-min_time = 2000
-
-[character]
-success_symbol = "[❯](green)"
-error_symbol = "[❯](red)"
