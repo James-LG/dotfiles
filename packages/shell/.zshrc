@@ -181,6 +181,13 @@ esac
 # sops
 export SOPS_AGE_KEY_FILE="$HOME/.sops/age.key"
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
+
 # Run environment.sh to load environment variables
 if [ -f "$HOME/.env.sh" ]; then
     source "$HOME/.env.sh"
