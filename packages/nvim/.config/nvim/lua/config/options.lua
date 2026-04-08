@@ -1,4 +1,4 @@
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = ""
 
 vim.o.number = true
 vim.o.relativenumber = true

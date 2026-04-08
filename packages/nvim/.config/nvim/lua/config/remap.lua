@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- Open focusaable diagnostics window
+-- Open focusable diagnostics window
 vim.keymap.set("n", "<C-w>d", function()
     vim.diagnostic.open_float({ focusable = true })
 end, { desc = "Open Diagnostics Float" })
