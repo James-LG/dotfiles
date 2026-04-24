@@ -19,7 +19,7 @@
 
 "custom/hyprpicker": {
 	"format": "",
-	"on-click": "hyprpicker | wl-copy",
+	"on-click": "hyprpicker --autocopy",
 	"tooltip": true,
 	"tooltip-format": "Hyprpicker",
 },
