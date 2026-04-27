@@ -15,5 +15,7 @@
   "dataview",
   "templater-obsidian",
   "quickadd",
-  "omnisearch"
+  "omnisearch",
+  "scrolling",
+  "vim-table-scroll"
 ]

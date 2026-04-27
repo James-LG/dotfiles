@@ -17,6 +17,7 @@ rsync -av --delete \
     --include 'plugins/' \
     --include 'plugins/*/' \
     --include 'plugins/*/data.json' \
+    --include 'plugins/vim-table-scroll/***' \
     --exclude 'plugins/*/*' \
     --exclude 'themes/' \
     "$OBSIDIAN_DIR/.obsidian/" "$DOTFILES_EXTRAS_DIR/.obsidian/"

@@ -1,0 +1,9 @@
+{
+  "id": "vim-table-scroll",
+  "name": "Vim Table Scroll",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Restores Ctrl+U/D half-page scrolling in vim normal mode when cursor is inside a markdown table.",
+  "author": "local",
+  "isDesktopOnly": false
+}

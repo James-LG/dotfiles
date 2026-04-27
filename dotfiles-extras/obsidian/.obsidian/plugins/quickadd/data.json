@@ -80,6 +80,26 @@
           }
         ]
       }
+    },
+    {
+      "id": "f65b895c-a3c3-4442-a987-35211afa330f",
+      "name": "Recipe",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Recipe",
+        "id": "3fa6e1cf-f061-4acc-a21c-404c0cf8bc1a",
+        "commands": [
+          {
+            "name": "new_recipe",
+            "type": "UserScript",
+            "id": "28f7240c-afdf-44f9-bb75-8107684e1d3a",
+            "path": "_scripts/new_recipe.js",
+            "settings": {}
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
