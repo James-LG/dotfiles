@@ -4,6 +4,10 @@ Documentation=https://github.com/hyprutils/hyprlauncher
 PartOf=graphical-session.target
 After=graphical-session.target
 ConditionEnvironment=WAYLAND_DISPLAY
+# Pseudo-mask: wofi replaced hyprlauncher as the launcher. This always-false
+# condition keeps the unit inert while preserving the file in dotfiles for
+# reference. Real `systemctl --user mask` would collide with the stow symlink.
+ConditionPathExists=!/dev/null
 
 [Service]
 Type=simple
