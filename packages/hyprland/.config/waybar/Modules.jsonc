@@ -379,7 +379,7 @@
 },
 
 "wireplumber": {
-	"format": "{icon} {volume} %",
+	"format": "{icon}  {volume}%",
 	"format-muted": " Mute",
 	"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
 	"on-click-right": "pavucontrol -t 3",
