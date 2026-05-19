@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# git wtrm <branch> [--force]
+# Remove the worktree for <branch> and sync tms bookmarks.
+set -euo pipefail
+
+branch="${1:-}"
+if [[ -z "$branch" ]]; then
+  echo "usage: git wtrm <branch> [--force]" >&2
+  exit 1
+fi
+
+repo_name="$(basename "$(git rev-parse --show-toplevel)")"
+worktree_path="$HOME/.worktrees/${repo_name}-${branch}"
+
+extra_args=()
+[[ "${2:-}" == "--force" ]] && extra_args+=(--force)
+
+git worktree remove "${extra_args[@]+"${extra_args[@]}"}" "$worktree_path"
+tms-sync-worktrees

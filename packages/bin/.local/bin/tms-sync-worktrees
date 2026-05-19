@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# Sync git worktrees to tms bookmarks.
+# Adds worktrees found under SEARCH_DIR as bookmarks, removes stale ones.
+# Uses Python to edit config.toml directly since `tms bookmark` silently ignores
+# paths that are under a configured search_path.
+set -euo pipefail
+
+SEARCH_DIR="${TMS_WORKTREE_SEARCH:-$HOME/.worktrees}"
+CONFIG="$HOME/.config/tms/config.toml"
+DRY_RUN=false
+
+for arg in "$@"; do
+  case "$arg" in
+    -n|--dry-run) DRY_RUN=true ;;
+    -h|--help)
+      echo "Usage: tms-sync-worktrees [-n|--dry-run]"
+      echo "  Adds git worktrees under SEARCH_DIR as tms bookmarks."
+      echo "  Removes bookmarks under SEARCH_DIR that are no longer valid worktrees."
+      echo "  SEARCH_DIR defaults to ~/.worktrees (override with TMS_WORKTREE_SEARCH)"
+      exit 0
+      ;;
+  esac
+done
+
+if [[ ! -f "$CONFIG" ]]; then
+  echo "error: tms config not found at $CONFIG" >&2
+  exit 1
+fi
+
+# Find all linked worktrees: dirs containing a .git FILE whose content points
+# into a worktrees/ directory (distinguishes worktrees from submodules).
+declare -a live_worktrees=()
+while IFS= read -r -d '' gitfile; do
+  dir="$(dirname "$gitfile")"
+  content="$(cat "$gitfile" 2>/dev/null)"
+  if [[ "$content" == gitdir:*worktrees* ]]; then
+    live_worktrees+=("$dir")
+  fi
+done < <(find "$SEARCH_DIR" -maxdepth 2 -name ".git" ! -type d -print0 2>/dev/null)
+
+# Delegate all bookmark diffing and TOML editing to Python.
+python3 - "$CONFIG" "$SEARCH_DIR" "$DRY_RUN" "${live_worktrees[@]+"${live_worktrees[@]}"}" <<'EOF'
+import sys, re, os
+
+config_path = sys.argv[1]
+search_dir  = sys.argv[2]
+dry_run     = sys.argv[3] == "true"
+live        = set(sys.argv[4:])
+
+with open(config_path) as f:
+    content = f.read()
+
+# Parse current bookmarks (simple regex; preserves comments/formatting elsewhere)
+m = re.search(r'(bookmarks\s*=\s*\[)([^\]]*?)(\])', content, re.DOTALL)
+if not m:
+    print("error: could not find bookmarks key in config", file=sys.stderr)
+    sys.exit(1)
+
+prefix, inner, suffix = m.group(1), m.group(2), m.group(3)
+current = [x.strip().strip('"').replace("~", os.environ["HOME"])
+           for x in re.findall(r'"[^"]+"', inner)]
+
+to_add    = sorted(p for p in live    if p not in current)
+# Only remove bookmarks that are under search_dir (script-managed) and no longer live
+to_remove = sorted(p for p in current if p.startswith(search_dir + os.sep)
+                                       and p not in live)
+
+for p in to_add:
+    print(f"add: {p}")
+for p in to_remove:
+    print(f"remove: {p}")
+
+if not to_add and not to_remove:
+    print("bookmarks up to date")
+    sys.exit(0)
+
+if dry_run:
+    sys.exit(0)
+
+new_bookmarks = [p for p in current if p not in to_remove] + to_add
+# Rebuild the bookmarks value, tilde-collapsing home dir to match tms style
+home = os.environ["HOME"]
+items = ", ".join(f'"{p.replace(home, "~")}"' for p in new_bookmarks)
+new_content = content[:m.start()] + f"bookmarks = [{items}]" + content[m.end():]
+
+with open(config_path, "w") as f:
+    f.write(new_content)
+EOF

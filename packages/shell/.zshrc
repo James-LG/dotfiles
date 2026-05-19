@@ -149,6 +149,9 @@ setopt append_history
 # local bin
 export PATH="$HOME/.local/bin:$PATH"
 
+# tms
+export TMS_CONFIG_FILE="$HOME/.config/tms/config.toml"
+
 # cargo
 export CARGO_HOME="$HOME/.cargo"
 case ":$PATH:" in
@@ -189,3 +192,7 @@ fi
 if [ -f "$HOME/.env.sh" ]; then
     source "$HOME/.env.sh"
 fi
+
+# autobob completions
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit && compinit

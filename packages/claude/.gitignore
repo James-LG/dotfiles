@@ -4,3 +4,6 @@
 !.claude/skills/
 # Local application state
 .local/
+
+# work skills
+.claude/skills/ls*
