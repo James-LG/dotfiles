@@ -1,2 +1,4 @@
 search_paths = ["~/code"]
 bookmarks = ["~/Documents/obsidian"]
+worktree_sessions = true
+lazy_restore = true
