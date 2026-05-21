@@ -46,12 +46,16 @@ For each suggestion, output:
 ```
 ## Suggestion N: "[Brief quote or summary]"
 
+**Location:** `file_path:line_number` (or file path if line number is unavailable)
+
 **Verdict:** ACCEPT | REJECT | DISCUSS
 
 **Reasoning:** [2-4 sentences explaining why, referencing codebase patterns or technical tradeoffs]
 
 **Alternative (if applicable):** [If rejecting but a middle ground exists, propose it]
 ```
+
+Always include the **Location** field. Derive it from the diff context or reviewer comment. If the reviewer references a specific line, use it. If not, identify the relevant file and approximate line from the diff.
 
 ## Verdict Guidelines
 
