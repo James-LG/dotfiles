@@ -19,8 +19,10 @@ git diff
 # Staged changes
 git diff --cached
 
-# Compare branches
-git diff main..HEAD
+# Compare branches (use origin/ to compare against the latest fetched
+# remote tip, in case the local main/master is behind)
+git fetch
+git diff origin/main..HEAD  # or origin/master..HEAD
 
 # Recent commits
 git diff HEAD~3..HEAD
