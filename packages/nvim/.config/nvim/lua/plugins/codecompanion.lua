@@ -13,7 +13,29 @@ return {
     keys = {
         { "<leader>a", nil, desc = "AI/CodeCompanion" },
         { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle chat" },
-        { "<leader>af", "<cmd>CodeCompanionChat<cr>", desc = "Focus/open chat" },
+        {
+            "<leader>af",
+            function()
+                -- Focus the existing chat if there is one; only create a new
+                -- chat when none exists. Plain `:CodeCompanionChat` always spawns
+                -- a fresh empty buffer, which hides (and appears to clear) a chat
+                -- you just added to via <leader>as.
+                local cc = require("codecompanion")
+                local chat = cc.last_chat()
+                if not chat then
+                    return cc.chat()
+                end
+                if chat.ui:is_visible() then
+                    local win = chat.ui.winnr
+                    if win and vim.api.nvim_win_is_valid(win) then
+                        vim.api.nvim_set_current_win(win)
+                    end
+                else
+                    chat.ui:open()
+                end
+            end,
+            desc = "Focus/open chat",
+        },
         { "<leader>ar", "<cmd>CodeCompanionHistory<cr>", desc = "Resume chat (browse history)" },
         {
             "<leader>aC",
@@ -44,7 +66,28 @@ return {
 
         require("codecompanion").setup({
             strategies = {
-                chat = { adapter = adapter },
+                chat = {
+                    adapter = adapter,
+                    tools = {
+                        opts = {
+                            -- Always load these tools in every chat buffer so the
+                            -- LLM can read/search the repo without being asked.
+                            -- insert_edit_into_file keeps its default post-edit
+                            -- confirmation prompt so edits aren't applied blindly.
+                            default_tools = {
+                                "read_file",
+                                "file_search",
+                                "grep_search",
+                                "insert_edit_into_file",
+                                "create_file",
+                                "delete_file",
+                            },
+                        },
+                        -- Read-only tools: skip the per-call approval prompt.
+                        read_file = { opts = { require_approval_before = false } },
+                        grep_search = { opts = { require_approval_before = false } },
+                    },
+                },
                 inline = { adapter = adapter },
                 cmd = { adapter = adapter },
             },
