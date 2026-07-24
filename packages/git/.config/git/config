@@ -1,0 +1,21 @@
+# XDG git config — read automatically by git and merged with ~/.gitconfig
+# (which still holds user identity + aliases). Keeps delta version-controlled.
+
+# delta - syntax-highlighting pager for git. https://github.com/dandavison/delta
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true             # use n / N to move between diff sections
+    line-numbers = true
+    syntax-theme = gruvbox-dark  # matches the bat / nvim colorscheme
+    # side-by-side = true        # uncomment for split-view diffs
+
+[merge]
+    conflictStyle = zdiff3
+
+[diff]
+    colorMoved = default
