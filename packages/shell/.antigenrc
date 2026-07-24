@@ -3,13 +3,12 @@ antigen use oh-my-zsh
 
 # Load bundles from the default repo (oh-my-zsh).
 antigen bundle git
-antigen bundle z
+# 'z' removed — replaced by zoxide (initialized in .zshrc).
 
 # Load bundles from external repos.
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zaw
 
 
 # Load the theme
@@ -19,6 +18,5 @@ antigen theme robbyrussell
 antigen apply
 
 # Settings
-bindkey '^X' zaw
-bindkey '^R' zaw-history
+# Ctrl-R is owned by atuin (see .zshrc); do not bind it here.
 bindkey '^Y' autosuggest-accept

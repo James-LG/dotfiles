@@ -125,25 +125,20 @@ alias vi="nvim"
 alias vim="nvim"
 alias cheatsheet="nvim ~/code/dotfiles/cheatsheet.md"
 
-# History settings
-if [ -n "$TMUX" ]; then
-    # Check if we are inside a tmux session
-    # Get the current tmux session name (#S)
-    TMUX_SESSION_NAME=$(tmux display-message -p '#S')
-    
-    # Set the history file path to include the session name
-    export HISTFILE=~/.zsh_history_tmux_$TMUX_SESSION_NAME
-else
-    # Default history file when not in tmux
-    export HISTFILE=~/.zsh_history
+# bat - cat with syntax highlighting (theme/style set in ~/.config/bat/config).
+# Safe as an interactive alias: bat auto-plain-prints when its output is piped.
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat --paging=never'
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-# Ensure history settings are configured for this specific file
-# Set history size
+# History settings
+# atuin (initialized at the bottom of this file) owns interactive history
+# search and per-session/global filtering, replacing the old per-tmux-session
+# HISTFILE split. zsh's own history file is kept as a plain backing store.
+export HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-
-# Recommended Zsh options for history separation
 setopt append_history
 
 # local bin
@@ -196,3 +191,24 @@ fi
 # autobob completions
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
+
+# atuin - shell history (must init after antigen/compinit so it binds Ctrl-R last)
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
+fi
+
+# zoxide - smarter cd (replaces the old 'z' plugin). `z <dir>` jumps, `zi` picks via fzf.
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+# yazi - wrapper so quitting yazi (with q) cd's the shell to the last directory.
+if command -v yazi >/dev/null 2>&1; then
+  function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+  }
+fi

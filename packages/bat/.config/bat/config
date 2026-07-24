@@ -1,0 +1,6 @@
+# bat configuration — https://github.com/sharkdp/bat
+# Theme matches the nvim gruvbox-material colorscheme.
+--theme="gruvbox-dark"
+
+# Show line numbers, git modification markers, and a file header.
+--style="numbers,changes,header"

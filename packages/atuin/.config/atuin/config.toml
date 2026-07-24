@@ -1,0 +1,26 @@
+# atuin configuration — https://docs.atuin.sh/configuration/config/
+
+## Ctrl-R search UI searches across ALL history by default.
+## Cycle filter modes (global / host / session / directory) with Ctrl-R
+## while the search is open.
+filter_mode = "global"
+
+## Up-arrow shows only the CURRENT session's history — this replicates the
+## old per-tmux-session HISTFILE split, while Ctrl-R still searches globally.
+filter_mode_shell_up_key_binding = "session"
+
+## Compact inline UI instead of taking over the whole terminal.
+style = "compact"
+inline_height = 20
+
+## Show a preview of the full command / its metadata.
+show_preview = true
+
+## Enter puts the selected command on the prompt to review/edit instead of
+## running it immediately. Set to true if you'd rather Enter run it directly.
+enter_accept = false
+
+## Sync is fully opt-in — nothing leaves this machine unless you run
+## `atuin register` (or `atuin login`) yourself.
+auto_sync = false
+update_check = false
