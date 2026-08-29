@@ -11,6 +11,11 @@ independent, run those concurrently as subagents, and reassemble the result.
 This skill does **not** invent new work. It only reorganizes the tasks that
 already exist.
 
+**Serial is a valid answer.** Being asked to parallelize is not evidence that
+parallel work exists. If the tasks are genuinely dependent, say so and do them
+in order — a manufactured fan-out costs more than it saves and corrupts the
+tree. Never split work just to have something to split.
+
 ## 1. Establish the task list
 
 Find the work, in this order of preference:
@@ -64,8 +69,35 @@ on each other.
 chunks beats ten agents doing fragments; coordination cost and merge risk both
 grow faster than the speedup.
 
-If nothing is independent, say so plainly and just do the work serially. That
-is a valid outcome of this skill.
+### When there is nothing to parallelize
+
+Reaching this conclusion is a success, not a failure of the skill. Report it
+directly — do not hedge, do not fan out a token agent or two to look
+productive, and do not shrink task boundaries until they technically stop
+overlapping.
+
+Say which tasks depend on which, and why the chain cannot be broken:
+
+```
+No parallel work available.
+
+  1 → 2 → 3: each consumes the interface the previous one defines.
+  4 edits the same file as 2.
+
+Doing these serially.
+```
+
+Then just do the work in order, as you normally would. Do not stop and wait for
+permission to proceed serially.
+
+The honest partial cases matter too, and get the same treatment:
+
+- **Only two of six tasks are independent** — say the speedup is marginal and
+  recommend serial, rather than fanning out two agents for show.
+- **Wave 0 is most of the work** — say so; the remainder may not be worth
+  splitting.
+- **The split depends on an assumption you could not verify** — say what you
+  could not confirm and default to serial.
 
 ## 3. Pick an isolation strategy
 
@@ -128,6 +160,9 @@ Isolation: shared tree, disjoint ownership
 
 Then launch, unless something in the analysis is genuinely uncertain — in that
 case ask first. Do not wait for approval on a clean, obviously-disjoint split.
+
+If the analysis produced no parallel waves, print the dependency chain instead
+and proceed serially — see §2.
 
 ## 6. Fan out
 
