@@ -65,7 +65,6 @@ programs. Install the dependencies listed below for the packages you use.
 | `nvim` | Neovim (lazy.nvim, LSP via Mason, treesitter, telescope, harpoon, CodeCompanion, etc.) | `neovim` (≥0.10), `git`, `ripgrep`, `fd`, a C compiler, `nodejs`/`npm`, `go`, `lazygit`, a Nerd Font. Mason auto-installs LSPs/formatters/DAP |
 | `stylua` | StyLua formatter config (used by nvim/conform) | `stylua` |
 | `claude` | Claude Code skills + `guided-dev` helper in `~/.local/bin` | Claude Code CLI (`claude`) |
-| `podman` | Container storage config | `podman` |
 
 ### Audio (PipeWire)
 
@@ -105,4 +104,23 @@ programs. Install the dependencies listed below for the packages you use.
 ## Extras
 
 - `cheatsheet.md` — personal keybind reference (open with the `cheatsheet` alias).
-- `dotfiles-extras/` — Obsidian vault scripts and editor settings (not stowed).
+- `dotfiles-extras/` — Obsidian vault scripts and editor settings, plus opt-in
+  stow packages (not stowed by `install.sh`, which only globs `packages/*`).
+
+### `podman-btrfs` (opt-in, btrfs hosts only)
+
+Points podman's storage at the **btrfs** driver so image layers use btrfs
+subvolumes and CoW instead of stacked overlayfs. Deliberately kept out of
+`packages/` because `driver = "btrfs"` is a hard failure — podman refuses to
+initialise storage if `~/.local/share/containers` is not on btrfs, so it must
+never be stowed machine-wide.
+
+Requires: `~/.local/share/containers` on btrfs, and `btrfs-progs` installed.
+
+```sh
+stow -v -R -d dotfiles-extras -t "$HOME" podman-btrfs
+```
+
+Apply it **before** running podman without it. Podman records the driver it
+initialised storage with, so switching afterwards fails with a driver mismatch
+and needs a `podman system reset` (destroys all images, containers, volumes).
