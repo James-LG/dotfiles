@@ -64,7 +64,8 @@ programs. Install the dependencies listed below for the packages you use.
 | --- | --- | --- |
 | `nvim` | Neovim (lazy.nvim, LSP via Mason, treesitter, telescope, harpoon, CodeCompanion, etc.) | `neovim` (≥0.10), `git`, `ripgrep`, `fd`, a C compiler, `nodejs`/`npm`, `go`, `lazygit`, a Nerd Font. Mason auto-installs LSPs/formatters/DAP |
 | `stylua` | StyLua formatter config (used by nvim/conform) | `stylua` |
-| `claude` | Claude Code skills + `guided-dev` helper in `~/.local/bin` | Claude Code CLI (`claude`) |
+| `claude` | Claude Code settings, my own skills (`jl-*`), + `guided-dev` helper in `~/.local/bin` | Claude Code CLI (`claude`) |
+| `claude-skills` | Vendored third-party Claude Code skills (`mp-*`, from [mattpocock/skills](https://github.com/mattpocock/skills)) | Claude Code CLI (`claude`) |
 
 ### Audio (PipeWire)
 
@@ -88,6 +89,16 @@ programs. Install the dependencies listed below for the packages you use.
 | `aerospace` | AeroSpace tiling window manager | AeroSpace (macOS only) |
 
 ## Bootstrap notes (things stow can't symlink for you)
+
+- **`~/.claude` is unfolded:** because both `claude` and `claude-skills` write
+  into `~/.claude/skills/`, stow can't keep `~/.claude` as a single folded
+  symlink — it's a real directory whose entries symlink back into the repo.
+  Anything Claude Code creates there afterwards lives in `$HOME`, not here.
+- **Refreshing `claude-skills`:** it's a vendored snapshot, prefixed `mp-` to
+  avoid clashing with built-ins (upstream `code-review` vs the built-in
+  `/code-review`) and with the `jl-*` skills. Re-pull upstream into
+  `~/.agents/skills` with its installer, then re-copy and re-prefix — the
+  in-skill `/skill-name` cross-references need the `mp-` prefix too.
 
 - **tmux plugins:** clone tpm first — `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`, then `prefix + I` inside tmux.
 - **Neovim:** plugins install on first launch (lazy.nvim); language servers/formatters install via `:Mason`.
