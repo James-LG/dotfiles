@@ -16,6 +16,12 @@ parallel work exists. If the tasks are genuinely dependent, say so and do them
 in order — a manufactured fan-out costs more than it saves and corrupts the
 tree. Never split work just to have something to split.
 
+**The work is the deliverable, not the analysis.** "Parallelize this" is a
+request to get the work done, with parallelism as the preferred means. A
+dependency report is never the end of the turn: whatever the analysis concludes,
+you finish the tasks — fanned out where that is safe, serially where it is not —
+and then verify and report as usual (§8, §9).
+
 ## 1. Establish the task list
 
 Find the work, in this order of preference:
@@ -87,8 +93,18 @@ No parallel work available.
 Doing these serially.
 ```
 
-Then just do the work in order, as you normally would. Do not stop and wait for
-permission to proceed serially.
+Then **immediately continue into the work**, in dependency order, in this same
+turn — as if the user had asked for the tasks without mentioning parallelism at
+all. The report above is a one-line preamble, not a stopping point.
+
+Do not stop and wait for permission to proceed serially, do not ask "shall I
+go ahead serially?", and do not end the turn with the dependency chain and
+nothing else. The only reasons to stop here are the ones that would have stopped
+you anyway: the task list itself is missing (§1), or the work needs a decision
+only the user can make. Skill invocation is not one of those reasons.
+
+When the serial run finishes, verify (§8) and report (§9) exactly as you would
+after a fan-out.
 
 The honest partial cases matter too, and get the same treatment:
 
@@ -98,6 +114,10 @@ The honest partial cases matter too, and get the same treatment:
   splitting.
 - **The split depends on an assumption you could not verify** — say what you
   could not confirm and default to serial.
+
+In every one of these cases the recommendation is stated in a sentence and then
+acted on in the same turn. Recommending serial means doing the work serially,
+not handing the choice back.
 
 ## 3. Pick an isolation strategy
 
@@ -162,7 +182,8 @@ Then launch, unless something in the analysis is genuinely uncertain — in that
 case ask first. Do not wait for approval on a clean, obviously-disjoint split.
 
 If the analysis produced no parallel waves, print the dependency chain instead
-and proceed serially — see §2.
+and carry straight on into doing the tasks in order — see §2. Printing the chain
+does not discharge the request.
 
 ## 6. Fan out
 
@@ -221,6 +242,9 @@ Run the project's build, typecheck, lint, and tests **once** on the merged
 tree — not per agent. Individually-green agents routinely produce a red merge;
 this step is where that surfaces.
 
+This applies to a fully serial run too: verify once at the end of the task list,
+not after each task.
+
 Fix failures yourself rather than dispatching another agent, unless the fix is
 large and cleanly separable.
 
@@ -234,7 +258,11 @@ Give the user:
 - Anything **not** done: tasks that stayed serial and are still pending, agents
   that came back `partial` or `blocked`, assumptions an agent flagged.
 
-Then run the next wave, or hand back.
+After a fully serial run, report the same way, minus the agent lines: what was
+done, verification result, anything left.
+
+Then run the next wave, do the next serial task, or — only once every task on
+the list is done or explicitly reported as blocked — hand back.
 
 ## Failure handling
 
