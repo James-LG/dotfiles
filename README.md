@@ -94,7 +94,10 @@ programs. Install the dependencies listed below for the packages you use.
   into `~/.claude/skills/`, stow can't keep `~/.claude` as a single folded
   symlink — it's a real directory whose entries symlink back into the repo.
   Anything Claude Code creates there afterwards lives in `$HOME`, not here.
-- **Refreshing `claude-skills`:** it's a vendored snapshot, prefixed `mp-` to
+- **Refreshing `claude-skills`:** it's a vendored snapshot of the MIT-licensed
+  [mattpocock/skills](https://github.com/mattpocock/skills) (notice kept in
+  `packages/claude-skills/LICENSE`; provenance and modifications in that
+  package's `README.md`), prefixed `mp-` to
   avoid clashing with built-ins (upstream `code-review` vs the built-in
   `/code-review`) and with the `jl-*` skills. Re-pull upstream into
   `~/.agents/skills` with its installer, then re-copy and re-prefix — the
