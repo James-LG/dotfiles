@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: jl-code-review
 description: Senior developer code review for git diffs. Use when the user asks to review code changes, critique a PR/MR, review a diff, or asks for feedback on code written by themselves or others. Triggers on phrases like "review this code", "review my changes", "code review", "critique this", "what's wrong with this code", or when a git diff is provided.
 ---
 

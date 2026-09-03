@@ -1,5 +1,5 @@
 ---
-name: code-change-validator
+name: jl-code-change-validator
 description: Post-change validation and regression testing for developers. Use when a developer has made significant code changes and wants to validate behavior, run real-world tests, and write automated regression tests for any issues found. Triggers on phrases like "validate my changes", "test my code changes", "check my git diff", "run tests on my changes", or when the user indicates they've just modified code and want verification.
 ---
 

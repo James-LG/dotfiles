@@ -1,5 +1,5 @@
 ---
-name: parallelize
+name: jl-parallelize
 description: Find independent work in the current task list or plan, do any foundational work that unlocks it, fan the rest out to concurrent subagents, then merge the results back. Use when there is an active todo list, plan, or multi-item task and the user wants it done in parallel. Triggers on phrases like "parallelize this", "fan this out", "run these in parallel", "split this work across agents", "what here can be done in parallel".
 ---
 

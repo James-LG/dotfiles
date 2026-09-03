@@ -1,5 +1,5 @@
 ---
-name: code-review-response
+name: jl-code-review-response
 description: Evaluate code review feedback on your changes. Use when you have a git diff of changes you authored and a list of reviewer suggestions, and need to determine which suggestions to accept, reject, or discuss. Helps assess validity of style, architecture, performance, correctness, and refactoring feedback by analyzing the surrounding codebase for conventions.
 ---
 
