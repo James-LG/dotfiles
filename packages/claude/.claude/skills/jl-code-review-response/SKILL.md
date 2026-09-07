@@ -13,8 +13,26 @@ Evaluate reviewer suggestions against your changes and codebase conventions to p
 2. **List of reviewer suggestions** (numbered or bulleted)
 3. **Codebase access** (if in claude-code) or relevant context files
 
+## Preflight: PR Comments
+
+If the suggestions come from a PR, verify the local checkout matches the PR **before**
+reading any local code — otherwise you evaluate code the reviewer never saw.
+
+```bash
+gh pr view <N> --json headRefName,headRefOid   # or the host's equivalent (gitea MCP, glab)
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+```
+
+- **Branch differs** — stop. Ask the user whether to switch branches. Do not check out on your own.
+- **Branch matches, commit differs** — stop. Tell the user which side is ahead (`git log --oneline HEAD..<headRefOid>`) and ask how to proceed.
+- **Both match** — proceed with the workflow.
+
+Skip this only when the suggestions are not tied to a PR (pasted diff, local review).
+
 ## Workflow
 
+0. **Preflight** — if the suggestions are PR comments, run the branch/commit check above
 1. **Parse the diff** — Identify files changed, additions, deletions, and the intent behind changes
 2. **Gather context** — If codebase access available, read related files to understand:
    - Existing patterns and conventions
