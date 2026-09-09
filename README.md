@@ -66,7 +66,7 @@ programs. Install the dependencies listed below for the packages you use.
 | `stylua` | StyLua formatter config (used by nvim/conform) | `stylua` |
 | `claude` | Claude Code settings, my own skills (`jl-*`), + `guided-dev` helper in `~/.local/bin` | Claude Code CLI (`claude`) |
 | `claude-skills` | Vendored third-party Claude Code skills (`mp-*`, from [mattpocock/skills](https://github.com/mattpocock/skills)) | Claude Code CLI (`claude`) |
-| `opencode` | opencode slash commands for manually triggering the `jl-*` skills and the user-invoked `mp-*` ones | [opencode](https://opencode.ai) |
+| `opencode` | opencode slash commands for manually triggering the `jl-*` skills and most `mp-*` ones | [opencode](https://opencode.ai) |
 
 ### Audio (PipeWire)
 
