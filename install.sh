@@ -3,4 +3,4 @@
 set -e
 
 cd packages
-stow -v -R -t $HOME *
+stow -v -R -t $HOME ${@:-*}

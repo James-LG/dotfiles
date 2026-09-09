@@ -21,13 +21,13 @@ Install (symlink) every package with stow from inside the repo:
 
 ```sh
 ./install.sh          # runs: cd packages && stow -v -R -t $HOME *
+./install.sh bat      # (re)stow just one package (or several)
 ```
 
-Stow, restow, or remove a single package:
+Remove a package's symlinks:
 
 ```sh
 cd packages
-stow -v -R -t "$HOME" bat     # (re)stow one package
 stow -v -D -t "$HOME" bat     # unstow (remove its symlinks)
 ```
 
