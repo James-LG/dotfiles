@@ -10,7 +10,8 @@ This example demonstrates the expected output format.
 
 **Issue:** User input interpolated directly into SQL query.
 
-**Why it matters:** Attackers can execute arbitrary SQL, leading to data theft or deletion.
+**Why it matters:** Attackers can execute arbitrary SQL, leading to data theft
+or deletion.
 
 **Suggestion:**
 ```typescript
@@ -28,9 +29,11 @@ const result = await db.query(query, [userId]);
 
 **Location:** `src/accounts/service.ts:45-52`
 
-**Issue:** Balance is read, modified, then written without locking. Concurrent requests can cause lost updates.
+**Issue:** Balance is read, modified, then written without locking. Concurrent
+requests can cause lost updates.
 
-**Why it matters:** Users could lose money or overdraw accounts when parallel transactions occur.
+**Why it matters:** Users could lose money or overdraw accounts when parallel
+transactions occur.
 
 **Suggestion:**
 Use a database transaction with row-level locking:
@@ -54,9 +57,11 @@ await db.transaction(async (tx) => {
 
 **Location:** `src/orders/service.ts:145-280`
 
-**Issue:** `processOrder()` handles validation, pricing, inventory, payment, and notifications in 135 lines.
+**Issue:** `processOrder()` handles validation, pricing, inventory, payment,
+and notifications in 135 lines.
 
-**Why it matters:** Difficult to test, understand, and modify. Changes to notifications risk breaking payment logic.
+**Why it matters:** Difficult to test, understand, and modify. Changes to
+notifications risk breaking payment logic.
 
 **Suggestion:**
 Extract into focused functions:
@@ -70,16 +75,21 @@ Compose in `processOrder()` with early returns on failure.
 
 ---
 
-### 4. 🟠 MAJOR Code Quality: Duplicated Validation Logic
+### 4. 🟠 MAJOR Correctness: Diverged Validation Copies — `admin.ts` Accepts
+Invalid Phones
 
 **Location:** `src/api/users.ts:34-48`, `src/api/admin.ts:67-81`
 
-**Issue:** Email and phone validation logic copied between two handlers with slight variations.
+**Issue:** Both handlers validate contact info. `users.ts:41` guards
+`data.phone && !isValidPhone(data.phone)`; `admin.ts:74` checks the email only
+— the phone clause was never copied across.
 
-**Why it matters:** Bug fixes must be applied in multiple places. Variations may cause inconsistent behavior.
+**Why it matters:** Admin-created records bypass phone validation entirely, so
+malformed numbers reach the notification queue and fail at send time. This is
+not a DRY nit: the two copies disagree, and `admin.ts` is the wrong one.
 
 **Suggestion:**
-Extract to a shared validator:
+Extract to a shared validator and route both handlers through it:
 ```typescript
 // src/validation/contact.ts
 export function validateContactInfo(data: ContactInput): ValidationResult {
@@ -96,9 +106,11 @@ export function validateContactInfo(data: ContactInput): ValidationResult {
 
 **Location:** `src/utils/helpers.ts:12, 28, 45`
 
-**Issue:** Mixed naming conventions: `getUserData`, `fetch_user_prefs`, `LoadUserSettings`.
+**Issue:** Mixed naming conventions: `getUserData`, `fetch_user_prefs`,
+`LoadUserSettings`.
 
-**Why it matters:** Inconsistency increases cognitive load and makes codebase feel unprofessional.
+**Why it matters:** Inconsistency increases cognitive load and makes codebase
+feel unprofessional.
 
 **Suggestion:**
 Standardize on camelCase (matching project convention):
@@ -111,9 +123,11 @@ Standardize on camelCase (matching project convention):
 
 **Location:** `src/auth/token.ts:23`
 
-**Issue:** `const expiry = Date.now() + 86400000` — unclear what this number represents.
+**Issue:** `const expiry = Date.now() + 86400000` — unclear what this number
+represents.
 
-**Why it matters:** Future developers must calculate or guess. Easy to introduce errors when modifying.
+**Why it matters:** Future developers must calculate or guess. Easy to
+introduce errors when modifying.
 
 **Suggestion:**
 ```typescript
@@ -129,7 +143,8 @@ const expiry = Date.now() + ONE_DAY_MS;
 
 **Issue:** `createOrder()` is exported but has no documentation.
 
-**Why it matters:** Consumers of this API must read implementation to understand expected input/output.
+**Why it matters:** Consumers of this API must read implementation to
+understand expected input/output.
 
 **Suggestion:**
 ```typescript
@@ -154,4 +169,7 @@ export async function createOrder(customerId: string, items: OrderItem[]): Promi
 | 🟡 Minor | 2 |
 | 🔵 Nit | 1 |
 
-**Overall:** The code has some critical security and concurrency issues that must be addressed before merging. The design issues are worth refactoring but could be tracked as follow-up work. Good use of TypeScript types throughout.
+**Overall:** The code has critical security and concurrency issues, plus the
+`admin.ts` validation gap, that must be addressed before merging. The
+god-function refactor is worth doing but could be tracked as follow-up work.
+Good use of TypeScript types throughout.
