@@ -389,9 +389,9 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("systemctl --user restart waybar"))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 
 -- Screenshot controls
-hl.bind(mainMod .. " + PRINT",         hl.dsp.exec_cmd("hyprshot -m window"))
-hl.bind("PRINT",                       hl.dsp.exec_cmd("hyprshot -m output"))
-hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(mainMod .. " + PRINT",         hl.dsp.exec_cmd("hyprshot -m window --clipboard-only"))
+hl.bind("PRINT",                       hl.dsp.exec_cmd("hyprshot -m output --clipboard-only"))
+hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 
 -- Clipboard history (cliphist) — pick a past entry and copy it back, then Ctrl+V
 hl.bind(mainMod .. " + SHIFT + V",
