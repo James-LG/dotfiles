@@ -1,0 +1,5 @@
+/* Hide line numbers on mobile (core + relative-line-numbers plugin gutter) */
+.is-mobile .cm-lineNumbers,
+.is-mobile .cm-gutter:has(.relative-line-numbers-mono) {
+  display: none !important;
+}

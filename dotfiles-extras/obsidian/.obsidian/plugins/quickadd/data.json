@@ -2,7 +2,7 @@
   "choices": [
     {
       "id": "b800c3b5-bf2f-499c-bc24-7030cc19916c",
-      "name": "00 Inbox",
+      "name": "Inbox",
       "type": "Capture",
       "command": false,
       "appendLink": false,
@@ -55,12 +55,11 @@
             "name": "journal_entry",
             "type": "UserScript",
             "id": "068268bc-7997-4604-9ab7-122ad0c1bc1d",
-            "path": "_scripts/journal_entry.js",
+            "path": "90 Meta/Scripts/journal_entry.js",
             "settings": {}
           }
         ]
-      },
-      "macroId": "b8899030-bd54-4a8b-8dad-6834eadcb74f"
+      }
     },
     {
       "id": "92d22359-3168-410e-9537-ccc99b3abfb4",
@@ -76,51 +75,25 @@
             "name": "random_name",
             "type": "UserScript",
             "id": "9044a07f-27a7-4731-af78-8ace11864b75",
-            "path": "_scripts/random_name.js",
+            "path": "90 Meta/Scripts/random_name.js",
             "settings": {}
           }
         ]
-      },
-      "macroId": "e9da306b-b4f4-41be-8913-799d4bff51f7"
-    }
-  ],
-  "macros": [
-    {
-      "name": "Journal",
-      "id": "b8899030-bd54-4a8b-8dad-6834eadcb74f",
-      "commands": [
-        {
-          "name": "journal_entry",
-          "type": "UserScript",
-          "id": "2cfecb6c-f5d7-48ef-a141-e2d79c03bdbf",
-          "path": "_scripts/journal_entry.js",
-          "settings": {}
-        }
-      ],
-      "runOnStartup": false
-    },
-    {
-      "name": "Random Note",
-      "id": "e9da306b-b4f4-41be-8913-799d4bff51f7",
-      "commands": [
-        {
-          "name": "random_name",
-          "type": "UserScript",
-          "id": "e4ebeaf8-6cd2-48b2-b926-6118a11a4875",
-          "path": "_scripts/random_name.js",
-          "settings": {}
-        }
-      ],
-      "runOnStartup": false
+      }
     }
   ],
   "inputPrompt": "single-line",
   "devMode": false,
   "templateFolderPath": "",
   "announceUpdates": "all",
-  "version": "1.13.2",
+  "version": "2.7.0",
+  "globalVariables": {},
+  "onePageInputEnabled": false,
   "disableOnlineFeatures": true,
   "enableRibbonIcon": false,
+  "showCaptureNotification": true,
+  "showInputCancellationNotification": false,
+  "enableTemplatePropertyTypes": false,
   "ai": {
     "defaultModel": "Ask me",
     "defaultSystemPrompt": "As an AI assistant within Obsidian, your primary goal is to help users manage their ideas and knowledge more effectively. Format your responses using Markdown syntax. Please use the [[Obsidian]] link format. You can write aliases for the links by writing [[Obsidian|the alias after the pipe symbol]]. To use mathematical notation, use LaTeX syntax. LaTeX syntax for larger equations should be on separate lines, surrounded with double dollar signs ($$). You can also inline math expressions by wrapping it in $ symbols. For example, use $$w_{ij}^{\text{new}}:=w_{ij}^{\text{current}}+etacdotdelta_jcdot x_{ij}$$ on a separate line, but you can write \"($eta$ = learning rate, $delta_j$ = error term, $x_{ij}$ = input)\" inline.",
@@ -188,9 +161,5 @@
     "migrateFileOpeningSettings": true,
     "setProviderModelDiscoveryMode": true
   },
-  "globalVariables": {},
-  "onePageInputEnabled": false,
-  "showCaptureNotification": true,
-  "showInputCancellationNotification": false,
-  "enableTemplatePropertyTypes": false
+  "macros": []
 }

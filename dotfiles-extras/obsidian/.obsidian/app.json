@@ -6,6 +6,5 @@
   "vimMode": true,
   "showLineNumber": true,
   "showUnsupportedFiles": true,
-  "propertiesInDocument": "visible",
-  "livePreview": true
+  "autoPairMarkdown": true
 }

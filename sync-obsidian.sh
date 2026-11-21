@@ -5,7 +5,7 @@ set -e
 OBSIDIAN_DIR="$HOME/Documents/obsidian"
 DOTFILES_EXTRAS_DIR="$(dirname "$0")/dotfiles-extras/obsidian"
 
-mkdir -p "$DOTFILES_EXTRAS_DIR"
+mkdir -p "$DOTFILES_EXTRAS_DIR/90 Meta"
 
 echo "Syncing Obsidian settings, templates, and scripts to dotfiles-extras..."
 
@@ -17,15 +17,24 @@ rsync -av --delete \
     --include 'plugins/' \
     --include 'plugins/*/' \
     --include 'plugins/*/data.json' \
-    --include 'plugins/vim-table-scroll/***' \
     --exclude 'plugins/*/*' \
     --exclude 'themes/' \
     "$OBSIDIAN_DIR/.obsidian/" "$DOTFILES_EXTRAS_DIR/.obsidian/"
 
-# Sync templates
-rsync -av --delete "$OBSIDIAN_DIR/templates/" "$DOTFILES_EXTRAS_DIR/templates/"
+# Sync templates and scripts (recipe-related files stay in the vault only)
+for dir in Templates Scripts; do
+    rsync -av --delete --exclude '*recipe*' \
+        "$OBSIDIAN_DIR/90 Meta/$dir/" "$DOTFILES_EXTRAS_DIR/90 Meta/$dir/"
+done
 
-# Sync scripts
-rsync -av --delete "$OBSIDIAN_DIR/_scripts/" "$DOTFILES_EXTRAS_DIR/_scripts/"
+# Strip recipe references from synced config: the Recipes bookmark and the
+# QuickAdd "Recipe" macro (its script isn't synced)
+strip() {
+    local file="$DOTFILES_EXTRAS_DIR/.obsidian/$1" json
+    json=$(jq --indent 2 "$2" "$file")
+    print -r -- "$json" > "$file"
+}
+strip bookmarks.json '.items |= map(select((.path // "") | test("Recipes") | not))'
+strip plugins/quickadd/data.json '.choices |= map(select(.name != "Recipe"))'
 
 echo "Done!"

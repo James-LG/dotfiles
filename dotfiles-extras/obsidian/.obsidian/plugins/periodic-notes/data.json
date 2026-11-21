@@ -8,7 +8,7 @@
   },
   "weekly": {
     "format": "gggg/gggg-[W]ww MMMM",
-    "template": "templates/journal.md",
+    "template": "90 Meta/Templates/journal.md",
     "folder": "10 Journal",
     "enabled": true
   },

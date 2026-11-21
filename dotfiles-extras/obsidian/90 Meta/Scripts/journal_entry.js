@@ -11,7 +11,8 @@ module.exports = async (params) => {
 
     // Format the weekly note filename
     const weeklyNoteFilename = `${weekYear}-W${weekNumber} ${monthName}`;
-    const weeklyNotePath = `10 Journal/${weekYear}/${weeklyNoteFilename}.md`;
+    const yearFolder = `10 Journal/${weekYear}`;
+    const weeklyNotePath = `${yearFolder}/${weeklyNoteFilename}.md`;
 
     // Format the daily heading
     const dayHeading = now.format('dddd MMMM Do');
@@ -22,7 +23,7 @@ module.exports = async (params) => {
 
     if (!weeklyNote) {
         // Read the template file
-        const templatePath = 'templates/journal.md';
+        const templatePath = '90 Meta/Templates/journal.md';
         const templateFile = app.vault.getAbstractFileByPath(templatePath);
         let templateContent = '';
 
@@ -33,7 +34,10 @@ module.exports = async (params) => {
             templateContent = `---\ntags:\n  - journal\n---\n`;
         }
 
-        // Create the weekly note with template content
+        // Create the year folder if needed, then the weekly note
+        if (!app.vault.getAbstractFileByPath(yearFolder)) {
+            await app.vault.createFolder(yearFolder);
+        }
         await app.vault.create(weeklyNotePath, templateContent);
         weeklyNote = app.vault.getAbstractFileByPath(weeklyNotePath);
     }

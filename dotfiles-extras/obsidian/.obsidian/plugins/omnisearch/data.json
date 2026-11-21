@@ -2,7 +2,10 @@
   "useCache": true,
   "hideExcluded": false,
   "recencyBoost": "0",
-  "downrankedFoldersFilters": [],
+  "downrankedFoldersFilters": [
+    "80 Archive",
+    "90 Meta"
+  ],
   "ignoreDiacritics": true,
   "ignoreArabicDiacritics": false,
   "indexedFileTypes": [],
