@@ -143,6 +143,7 @@ setopt append_history
 
 # local bin
 export PATH="$HOME/.local/bin:$PATH"
+typeset -U path  # dedupe PATH (nested shells re-prepend entries)
 
 # tms
 export TMS_CONFIG_FILE="$HOME/.config/tms/config.toml"
@@ -226,3 +227,17 @@ if command -v yazi >/dev/null 2>&1; then
     rm -f -- "$tmp"
   }
 fi
+
+# gwtb <branch>: add a worktree at ../<repo>-<branch> (slashes -> dashes), tracking origin/<branch> if it exists
+gwtb() {
+  local branch=$1 root dir
+  [[ -z $branch ]] && { echo "usage: gwtb <branch>"; return 1; }
+  root=$(git rev-parse --show-toplevel) || return
+  dir="$root-${branch//\//-}"
+  git fetch origin "+refs/heads/$branch:refs/remotes/origin/$branch" 2>/dev/null
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git worktree add "$dir" "$branch"
+  else
+    git worktree add --track -b "$branch" "$dir" "origin/$branch"
+  fi
+}
