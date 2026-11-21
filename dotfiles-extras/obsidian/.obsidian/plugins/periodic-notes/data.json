@@ -3,19 +3,19 @@
   "hasMigratedDailyNoteSettings": true,
   "hasMigratedWeeklyNoteSettings": false,
   "daily": {
-    "folder": "Journal",
+    "folder": "10 Journal",
     "enabled": true
   },
   "weekly": {
-    "format": "gggg-[W]ww MMMM",
+    "format": "gggg/gggg-[W]ww MMMM",
     "template": "templates/journal.md",
-    "folder": "Journal",
+    "folder": "10 Journal",
     "enabled": true
   },
   "monthly": {
     "format": "YYYY-MM MMMM",
     "template": "",
-    "folder": "Journal",
+    "folder": "10 Journal",
     "enabled": false
   },
   "quarterly": {

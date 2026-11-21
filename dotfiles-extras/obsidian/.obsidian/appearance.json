@@ -7,7 +7,7 @@
   "textFontFamily": "Iosevka Aile,Iosevka",
   "enabledCssSnippets": [
     "line-numbers",
-    "title",
-    "font"
+    "font",
+    "title"
   ]
 }

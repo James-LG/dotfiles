@@ -1,6 +1,6 @@
 /**
  * QuickAdd Macro: random_readable_name
- * Creates a new note in the "Assorted Notes/" folder with a random name
+ * Creates a new note in the "00 Inbox/" folder with a random name
  * in the format: adjective-noun (or multiple-adjective-noun if needed)
  *
  * Automatically finds a unique name by generating new combinations.
@@ -123,7 +123,7 @@ module.exports = async (params) => {
     "yak", "zenith", "zephyr"
   ];
 
-  const folderPath = "Assorted Notes";
+  const folderPath = "00 Inbox";
 
   // Function to get a random item from an array
   const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -168,12 +168,13 @@ module.exports = async (params) => {
 
   // Create the new note
   const filePath = `${folderPath}/${filename}.md`;
-  await app.vault.create(filePath, "");
+  // `randomized` lets the organize-inbox skill know the title is a placeholder
+  await app.vault.create(filePath, "---\nrandomized: true\n---\n");
 
   // Open the new note
   const file = app.vault.getAbstractFileByPath(filePath);
   if (file) {
-    const leaf = app.workspace.getLeaf(false);
+    const leaf = app.workspace.getLeaf("tab");
     await leaf.openFile(file);
   }
 };

@@ -1,5 +1,4 @@
 [
-  "table-editor-obsidian",
   "calendar",
   "tag-wrangler",
   "periodic-notes",
@@ -8,14 +7,13 @@
   "copy-url-in-preview",
   "obsidian-plugin-toc",
   "obsidian-vimrc-support",
-  "obsidian-contextual-typography",
-  "obsidian-relative-line-numbers",
   "url-into-selection",
   "nldates-obsidian",
   "dataview",
   "templater-obsidian",
   "quickadd",
   "omnisearch",
-  "scrolling",
-  "vim-table-scroll"
+  "obsidian-tasks-plugin",
+  "obsidian-contextual-typography",
+  "obsidian-relative-line-numbers"
 ]

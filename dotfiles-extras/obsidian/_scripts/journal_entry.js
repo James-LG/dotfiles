@@ -11,7 +11,7 @@ module.exports = async (params) => {
 
     // Format the weekly note filename
     const weeklyNoteFilename = `${weekYear}-W${weekNumber} ${monthName}`;
-    const weeklyNotePath = `Journal/${weeklyNoteFilename}.md`;
+    const weeklyNotePath = `10 Journal/${weekYear}/${weeklyNoteFilename}.md`;
 
     // Format the daily heading
     const dayHeading = now.format('dddd MMMM Do');
@@ -56,7 +56,7 @@ module.exports = async (params) => {
     }
 
     // Open the weekly note
-    const leaf = app.workspace.getLeaf(false);
+    const leaf = app.workspace.getLeaf("tab");
     await leaf.openFile(weeklyNote);
 
     // Move cursor to the end of today's section
