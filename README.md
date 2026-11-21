@@ -79,7 +79,6 @@ programs. Install the dependencies listed below for the packages you use.
 
 | Package | Configures | Dependencies |
 | --- | --- | --- |
-| `rclone` | systemd user units: OneDrive mount + Obsidian vault sync (timer) | `rclone` (configured `onedrive:` remote) |
 | `ssh` | `ssh-agent` systemd user service (socket in `$XDG_RUNTIME_DIR`) | `openssh` |
 | `obsidian` | Obsidian launch flags | `obsidian` |
 
@@ -109,7 +108,6 @@ programs. Install the dependencies listed below for the packages you use.
 - **systemd user services** are stowed but must be enabled, e.g.
   `systemctl --user enable --now kanshi ssh-agent cliphist-text cliphist-image`
   (the Hyprland graphical-session units are listed in `hyprland.conf`).
-- **rclone** needs a configured `onedrive:` remote (`rclone config`) before the mount/sync units work.
 
 ## Requirements
 
